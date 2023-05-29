@@ -1,0 +1,5 @@
+2023-02-28T10:56:46.1456489-03:00  [INF] Now listening on: "https://localhost:7186" (d826f4b8)
+2023-02-28T10:56:46.1594234-03:00  [INF] Now listening on: "http://localhost:5191" (d826f4b8)
+2023-02-28T10:56:46.2026980-03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2023-02-28T10:56:46.2119929-03:00  [INF] Hosting environment: "Development" (c3307c92)
+2023-02-28T10:56:46.2206327-03:00  [INF] Content root path: "C:\ResposBitBucket\ESoap\ESoap\ESoapApi" (b5d60022)

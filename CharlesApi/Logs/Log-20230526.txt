@@ -1,0 +1,7 @@
+2023-05-26T12:20:41.1492074-04:00  [INF] Now listening on: "https://localhost:7213" (d826f4b8)
+2023-05-26T12:20:41.1704164-04:00  [INF] Now listening on: "http://localhost:5248" (d826f4b8)
+2023-05-26T12:20:41.2079486-04:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2023-05-26T12:20:41.2261990-04:00  [INF] Hosting environment: "Development" (c3307c92)
+2023-05-26T12:20:41.2341261-04:00  [INF] Content root path: "C:\ResposBitBucket\ESoap\ESoap\CharlesApi" (b5d60022)
+2023-05-26T12:21:13.9410365-04:00 0HMQU0KJ4QA6F:00000009 [INF] registroDenuncio => 26-05-2023 12:21:13,declararSiniestroRequest => {"patente":"OT0150","numeroPoliza":"100036948","relatoSiniestro":"demo","fechaSiniestro":"20230413 15:24:35","lugarSiniestro":"demo","comentarioSiniestro":"demo","tipoEvento":"Colisión","codigoTipoEvento":"02"} (29838887)
+2023-05-26T12:21:24.1900800-04:00 0HMQU0KJ4QA6F:00000009 [INF] REGISTRO DENUNCIO => 26-05-2023 12:21:24, registroDenuncioRequest =>{"claimGroup":{"policyNo":"100036948","causeId":1,"claimCategory":"DAMAGES","eventType":500,"eventDate":"2023-04-13T00:00:00Z","eventDescription":"demo","eventCountry":"CL","eventPlace":"demo","claimComment":"demo"}} (f89f4fdb)
