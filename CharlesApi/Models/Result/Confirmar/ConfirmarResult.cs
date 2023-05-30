@@ -4,6 +4,9 @@ namespace Charles.Models.Result.Confirmar
 {
     public class ConfirmarResult
     {
+        [JsonProperty("errores")]
+        public List<string> Errores { get; set; } = new List<string>();
+        [JsonProperty("statusCode")]
         public int StatusCode { get; set; }
         [JsonProperty("claimId")]
         public long ClaimId { get; set; }

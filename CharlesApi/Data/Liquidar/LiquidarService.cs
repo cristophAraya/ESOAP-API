@@ -24,6 +24,9 @@
 using AutoMapper;
 using Charles.Models.Result.Confirmar;
 using CharlesApi.ConfirmarEvaluacion;
+using CharlesApi.Data.CoberturaSiniestrada;
+using CharlesApi.Data.Participante;
+using CharlesApi.Data.Reclamante;
 using CharlesApi.Data.TipoReclamante;
 using CharlesApi.Entities.Beneficiario;
 using CharlesApi.Entities.CoberturaSiniestrada;
@@ -36,6 +39,7 @@ using CharlesApi.Models.Request.ConfirmarCalculo;
 using CharlesApi.Models.Request.ConfirmarLiquidacion;
 using CharlesApi.Models.Request.ConfirmarPago;
 using CharlesApi.Models.Request.CreaPersona;
+using CharlesApi.Models.Request.DeclararSiniestro;
 using CharlesApi.Models.Request.LiquidarSiniestro;
 using CharlesApi.Models.Request.ReclamantePrincipal;
 using CharlesApi.Models.Request.RegistroCalculo;
@@ -52,6 +56,7 @@ using CharlesApi.Models.Result.ConsultaPoliza;
 using CharlesApi.Models.Result.ConsultaSiniestro;
 using CharlesApi.Models.Result.CreaPersona;
 using CharlesApi.Models.Result.LiquidarSiniestro;
+using CharlesApi.Models.Result.ReclamantePrincipal;
 using CharlesApi.Models.Result.RegistroCalculo;
 using CharlesApi.Models.Result.RegistroEvaluacion;
 using CharlesApi.Models.Result.RegistroPago;
@@ -62,6 +67,9 @@ using CharlesApi.Repository.Participante;
 using CharlesApi.Repository.Reclamante;
 using CharlesApi.Repository.SiniestroLog;
 using CharlesApi.Repository.TipoReclamante;
+using CharlesApi.Request.CoberturaSiniestrada;
+using CharlesApi.Request.Participante;
+using CharlesApi.Request.Reclamante;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using RestSharp;
@@ -137,19 +145,19 @@ namespace CharlesApi.Data.Liquidar
                         }
 
                         //beneficiarios                        
-                        foreach (var unBeneficiario in unaCobertura.Beneficiarios)
-                        {
-                            var beneficiarioModel = mapper.Map<BeneficiarioModel>(unBeneficiario);
-                            beneficiarioModel.RutReclamante = unReclamante.Rut;
-                            beneficiarioModel.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
-                            beneficiarioModel.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;
-                            beneficiarioModel.Cobertura = unaCobertura.Cobertura;
-                            var beneficiario = beneficiarioRepository.ObtenerBeneficiario(beneficiarioModel);
-                            if(beneficiario == null)
-                            {
-                                beneficiario = beneficiarioRepository.CrearBeneficiario(beneficiarioModel);
-                            }
-                        }
+                        //foreach (var unBeneficiario in unaCobertura.Beneficiarios)
+                        //{
+                        //    var beneficiarioModel = mapper.Map<BeneficiarioModel>(unBeneficiario);
+                        //    beneficiarioModel.RutReclamante = unReclamante.Rut;
+                        //    beneficiarioModel.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
+                        //    beneficiarioModel.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;
+                        //    beneficiarioModel.Cobertura = unaCobertura.Cobertura;
+                        //    var beneficiario = beneficiarioRepository.ObtenerBeneficiario(beneficiarioModel);
+                        //    if(beneficiario == null)
+                        //    {
+                        //        beneficiario = beneficiarioRepository.CrearBeneficiario(beneficiarioModel);
+                        //    }
+                        //}
                     }         
                 }
 
@@ -394,201 +402,218 @@ namespace CharlesApi.Data.Liquidar
                         foreach (var unaCobertura in unReclamante.CoberturasSiniestradas)
                         {
                             foreach (var unParticipante in unaCobertura.Participantes)
-                            {
-                                //1-BUSCAMOS SI YA REGISTRAMOS RECLAMANTE EN BD
-                                var reclamanteModelBD = mapper.Map<ReclamanteModel>(unReclamante);
-                                reclamanteModelBD.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;
-                                reclamanteModelBD.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
-                                reclamanteModelBD.Cobertura = unaCobertura.Cobertura;
-                                reclamanteModelBD = reclamanteRepository.ObtenerReclamante(reclamanteModelBD);
-                                if (reclamanteModelBD == null)
-                                {
-                                    var persona = ConsultaPersona(unReclamante.Rut);
-                                    if (persona.StatusCode == StatusCodes.Status200OK && persona.TotalRowCount == 0)
-                                    {
-                                        var creaPersona = CreaPersona(unReclamante);//107
-                                        if (creaPersona.StatusCode == StatusCodes.Status200OK)
-                                        {
-                                            persona = ConsultaPersona(unReclamante.Rut);
-                                        }
-                                        else
-                                        {
-                                            //  RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CREAR PERSONA (IPC 107)", creaPersona.Errores.FirstOrDefault());
-                                            //  liquidarSiniestroRequest.StatusCode = StatusCodes.Status400BadRequest;
-                                            //   liquidarSiniestroRequest.Errores.Add(creaPersona.Errores.FirstOrDefault());
-                                            // return liquidarSiniestroRequest;
-                                        }
-
-                                    }
-                                    if (persona.StatusCode != StatusCodes.Status200OK)
-                                    {
-                                        //    RegistraSiniestroLog(confirmarLiquidacionRequest, "PROBLEMAS AL CONSULTAR PERSONA (IPC 109)", persona.Errores.FirstOrDefault());
-                                        //    confirmarLiquidacionResult.StatusCode = StatusCodes.Status400BadRequest;
-                                        //    confirmarLiquidacionResult.Errores.Add(persona.Errores.FirstOrDefault());
-                                        //    return confirmarLiquidacionResult;
-                                    }
-                                    var participante = ConsultaPersona(unParticipante.Rut);
-                                    if (participante.StatusCode == StatusCodes.Status200OK && participante.TotalRowCount == 0)
-                                    {
-                                        var creaPersona = CreaPersonaParticipante(unParticipante);//107
-                                        if (creaPersona.StatusCode == StatusCodes.Status200OK)
-                                        {
-                                            participante = ConsultaPersona(unParticipante.Rut);
-                                        }
-                                        else
-                                        {
-                                            //  RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CREAR PERSONA (IPC 107)", creaPersona.Errores.FirstOrDefault());
-                                            //  liquidarSiniestroRequest.StatusCode = StatusCodes.Status400BadRequest;
-                                            //   liquidarSiniestroRequest.Errores.Add(creaPersona.Errores.FirstOrDefault());
-                                            // return liquidarSiniestroRequest;
-                                        }
-                                    }
-                                    if (participante.StatusCode != StatusCodes.Status200OK)
-                                    {
-                                        //    RegistraSiniestroLog(confirmarLiquidacionRequest, "PROBLEMAS AL CONSULTAR PERSONA (IPC 109)", persona.Errores.FirstOrDefault());
-                                        //    confirmarLiquidacionResult.StatusCode = StatusCodes.Status400BadRequest;
-                                        //    confirmarLiquidacionResult.Errores.Add(persona.Errores.FirstOrDefault());
-                                        //    return confirmarLiquidacionResult;
-                                    }
-
-                                    //REGISTRAR RECLAMANTE + participante + cobertura => 113   
-                                    var reclamantePrincipal = RegistroReclamante(persona, siniestro, unaCobertura, unReclamante.CodigoTipoReclamante, participante);
-
-                                    if (reclamantePrincipal.StatusCode == StatusCodes.Status200OK)
-                                    {
-                                        //CONFIRMAR REQUEST => 114
-                                        ConfirmarRequest confirmarRequest = new ConfirmarRequest();
-                                        confirmarRequest.ClaimId = reclamantePrincipal.ClaimId;
-                                        confirmarRequest.ClaimNo = reclamantePrincipal.ClaimId.ToString();
-                                        confirmarRequest.RequestNo = reclamantePrincipal.RequestNo;
-
-                                        var confirmar = ConfirmarRequest(confirmarRequest);
-                                        if (confirmar.StatusCode == StatusCodes.Status200OK)
-                                        {
-                                            //ACTUALIZAR AL RECLAMANTE => NUMEROSOLICITUD == REQUEST
-                                            var reclamanteModel = mapper.Map<ReclamanteModel>(unReclamante);
-                                            reclamanteModel.NumeroSolicitud = Convert.ToInt32(reclamantePrincipal.RequestNo);
-                                            reclamanteModel.IdPersona = persona.RowSet[0].ManId.ToString();
-                                            reclamanteModel.Cobertura = unaCobertura.Cobertura;
-                                            reclamanteModel.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
-                                            reclamanteModel.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;
-                                            reclamanteRepository.ActualizarReclamante(reclamanteModel);
-                                        }
-                                    }
-                                }
-
-                                siniestro = ConsultaSiniestro(liquidarSiniestroRequest.NumeroSiniestro);
+                            {                             
                                 var poliza = ConsultaPoliza(siniestro.PolicyReg.ToString());
 
-                                //DESDE ACA ES POR FACTURAS
-                                var personaReclamante = ConsultaPersona(unReclamante.Rut);
+                                //DESDE ACA ES POR FACTURAS                            
                                 foreach (var unaFactura in unParticipante.Facturas)
                                 {
-                                    //BUSCAMOS REQUEST POR PARTICIPANTE
-                                    var participanteBD = mapper.Map<ParticipanteModel>(unParticipante);
-                                    participanteBD.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
-                                    participanteBD.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;
-                                    participanteBD = participanteRepository.ObtenerParticipante(participanteBD);                                   
-
-                                   
-                                    //var requestNo = (long)Convert.ToDouble(reclamantePrincipal.RequestNo);// confirmar.Requests.RequestsRequests[0].RequestNo;
-                                    var requestNo = (long)Convert.ToDouble(participanteBD.NumeroSolicitud);
-
-                                    // se saca del 115 con el claimId por el Request denteo de la lista clainObjects dentro de los claimrequest 
-                                    var claimObjectSeq = siniestro.ClaimRequests.Where(c => c.RequestId == requestNo).FirstOrDefault().ClaimObjects.Where(c => c.RequestId == requestNo).FirstOrDefault();
-
-                                    // REGISTRAR EVALUACION => 120
-                                    var registroEvaluacion = RegistroEvaluacion(siniestro, requestNo, claimObjectSeq.ClaimObjSeq, unaCobertura, personaReclamante, unaFactura);
-                                    if (registroEvaluacion.StatusCode == StatusCodes.Status200OK)
+                                    //1-BUSCAMOS SI YA REGISTRAMOS RECLAMANTE EN BD
+                                    var reclamanteModelBD = mapper.Map<ReclamanteModel>(unReclamante);
+                                    reclamanteModelBD.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;
+                                    reclamanteModelBD.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
+                                    reclamanteModelBD.Cobertura = unaCobertura.Cobertura;
+                                    reclamanteModelBD = reclamanteRepository.ObtenerReclamante(reclamanteModelBD);
+                                    if (reclamanteModelBD == null)
                                     {
-                                        //CONFIRMAR EVALUACION => 121
-                                        var confirmarEvaluacion = ConfirmarEvaluacion(claimObjectSeq.ClaimObjSeq, registroEvaluacion);
-                                        if (confirmarEvaluacion.StatusCode == StatusCodes.Status200OK)
+                                        var persona = ConsultaPersona(unReclamante.Rut);
+                                        if (persona.StatusCode == StatusCodes.Status200OK && persona.TotalRowCount == 0)
                                         {
-                                            //REGISTRAR CALCULO => 124
-                                            var registroCalculo = RegistroCalculo(requestNo, claimObjectSeq.ClaimObjSeq, unaCobertura, siniestro, confirmarEvaluacion, unaFactura);
-                                            if (registroCalculo.StatusCode == StatusCodes.Status200OK)
+                                            var creaPersona = CreaPersona(unReclamante);//107
+                                            if (creaPersona.StatusCode == StatusCodes.Status200OK)
                                             {
-                                                //CONFIRMAR CALCULO => 125
-                                                var confirmacCalculo = ConfirmarCalculo(registroCalculo);
-                                                if (confirmacCalculo.StatusCode == StatusCodes.Status200OK)
+                                                persona = ConsultaPersona(unReclamante.Rut);
+                                            }
+                                            else
+                                            {
+                                                //  RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CREAR PERSONA (IPC 107)", creaPersona.Errores.FirstOrDefault());
+                                                //  liquidarSiniestroRequest.StatusCode = StatusCodes.Status400BadRequest;
+                                                //   liquidarSiniestroRequest.Errores.Add(creaPersona.Errores.FirstOrDefault());
+                                                // return liquidarSiniestroRequest;
+                                            }
+
+                                        }
+                                        if (persona.StatusCode != StatusCodes.Status200OK)
+                                        {
+                                            //    RegistraSiniestroLog(confirmarLiquidacionRequest, "PROBLEMAS AL CONSULTAR PERSONA (IPC 109)", persona.Errores.FirstOrDefault());
+                                            //    confirmarLiquidacionResult.StatusCode = StatusCodes.Status400BadRequest;
+                                            //    confirmarLiquidacionResult.Errores.Add(persona.Errores.FirstOrDefault());
+                                            //    return confirmarLiquidacionResult;
+                                        }
+                                        var participante = ConsultaPersona(unParticipante.Rut);
+                                        if (participante.StatusCode == StatusCodes.Status200OK && participante.TotalRowCount == 0)
+                                        {
+                                            var creaPersona = CreaPersonaParticipante(unParticipante);//107
+                                            if (creaPersona.StatusCode == StatusCodes.Status200OK)
+                                            {
+                                                participante = ConsultaPersona(unParticipante.Rut);
+                                            }
+                                            else
+                                            {
+                                                //  RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CREAR PERSONA (IPC 107)", creaPersona.Errores.FirstOrDefault());
+                                                //  liquidarSiniestroRequest.StatusCode = StatusCodes.Status400BadRequest;
+                                                //   liquidarSiniestroRequest.Errores.Add(creaPersona.Errores.FirstOrDefault());
+                                                // return liquidarSiniestroRequest;
+                                            }
+                                        }
+                                        if (participante.StatusCode != StatusCodes.Status200OK)
+                                        {
+                                            //    RegistraSiniestroLog(confirmarLiquidacionRequest, "PROBLEMAS AL CONSULTAR PERSONA (IPC 109)", persona.Errores.FirstOrDefault());
+                                            //    confirmarLiquidacionResult.StatusCode = StatusCodes.Status400BadRequest;
+                                            //    confirmarLiquidacionResult.Errores.Add(persona.Errores.FirstOrDefault());
+                                            //    return confirmarLiquidacionResult;
+                                        }
+
+                                        //REGISTRAR RECLAMANTE + participante + cobertura => 113   
+                                        var reclamantePrincipal = RegistroReclamante(persona, siniestro, unaCobertura, unReclamante.CodigoTipoReclamante, participante);
+
+                                        if (reclamantePrincipal.StatusCode == StatusCodes.Status200OK)
+                                        {
+                                            //CONFIRMAR REQUEST => 114
+                                            ConfirmarRequest confirmarRequest = new ConfirmarRequest();
+                                            confirmarRequest.ClaimId = reclamantePrincipal.ClaimId;
+                                            confirmarRequest.ClaimNo = reclamantePrincipal.ClaimId.ToString();
+                                            confirmarRequest.RequestNo = reclamantePrincipal.RequestNo;
+
+                                            var confirmar = ConfirmarRequest(confirmarRequest);
+                                            if (confirmar.StatusCode == StatusCodes.Status200OK)
+                                            {
+                                                //RECLAMANTE                        
+                                                var reclamanteModel = mapper.Map<ReclamanteModel>(unReclamante);
+                                                //reclamanteModel.NumeroPoliza = siniestro.PolicyReg.ToString();
+                                                reclamanteModel.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
+                                                reclamanteModel.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;
+                                                reclamanteModel.IdPersona = persona.RowSet[0].ManId.ToString(); ;
+                                                reclamanteModel.NumeroSolicitud = Convert.ToInt32(reclamantePrincipal.RequestNo);
+                                                reclamanteRepository.CrearReclamante(reclamanteModel);
+
+                                                //PARTICIPANTE
+                                                var participanteModel = mapper.Map<ParticipanteModel>(unParticipante);
+                                                participanteModel.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
+                                                participanteModel.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;
+                                                participanteModel.NumeroSolicitud = reclamanteModel.NumeroSolicitud;
+                                                participanteRepository.CrearParticipante(participanteModel);
+
+                                                //COBERTURA
+                                                var coberturaModel = mapper.Map<CoberturaSiniestradaModel>(unaCobertura);
+                                                coberturaModel.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
+                                                coberturaModel.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;
+                                                coberturaModel.NumeroSolicitud = reclamanteModel.NumeroSolicitud;
+                                                coberturaModel.RutReclamante = unReclamante.Rut;
+
+                                                var cobertura = coberturaSiniestradaRepository.CrearCoberturaSiniestrada(coberturaModel);
+                                                var personaReclamante = ConsultaPersona(unReclamante.Rut);
+                                                var requestNo = (long)Convert.ToDouble(reclamantePrincipal.RequestNo);
+                                                siniestro = ConsultaSiniestro(liquidarSiniestroRequest.NumeroSiniestro);
+
+                                                // se saca del 115 con el claimId por el Request denteo de la lista clainObjects dentro de los claimrequest 
+                                                var claimObjectSeq = siniestro.ClaimRequests.Where(c => c.RequestId == requestNo).FirstOrDefault().ClaimObjects.Where(c => c.RequestId == requestNo).FirstOrDefault();
+
+                                                // REGISTRAR EVALUACION => 120
+                                                var registroEvaluacion = RegistroEvaluacion(siniestro, requestNo, claimObjectSeq.ClaimObjSeq, unaCobertura, personaReclamante, unaFactura);
+                                                if (registroEvaluacion.StatusCode == StatusCodes.Status200OK)
                                                 {
-                                                    //REGISTRO PAGO => 122
-                                                    var guardaBeneficiarios = GuardarBeneficiarios(unReclamante.Rut, unParticipante.Rut, unaCobertura.Cobertura, liquidarSiniestroRequest.NumeroSiniestro, liquidarSiniestroRequest.NumeroInforme, participanteBD.NumeroSolicitud,unaFactura.Beneficiarios);
-
-
-                                                    var registroPago = RegistroPagoNew(requestNo, confirmacCalculo.ClaimDscrSeq, siniestro, unaFactura.Beneficiarios);
-                                                    if (registroPago.StatusCode == StatusCodes.Status200OK)
+                                                    //CONFIRMAR EVALUACION => 121
+                                                    var confirmarEvaluacion = ConfirmarEvaluacion(claimObjectSeq.ClaimObjSeq, registroEvaluacion);
+                                                    if (confirmarEvaluacion.StatusCode == StatusCodes.Status200OK)
                                                     {
-                                                        //CONFIRMAR  PAGO => 123
-                                                        var confirmaPago = ConfirmarPago(requestNo, registroPago, siniestro);
-                                                        if (confirmaPago.StatusCode == StatusCodes.Status200OK)
+                                                        //REGISTRAR CALCULO => 124
+                                                        var registroCalculo = RegistroCalculo(requestNo, claimObjectSeq.ClaimObjSeq, unaCobertura, siniestro, confirmarEvaluacion, unaFactura);
+                                                        if (registroCalculo.StatusCode == StatusCodes.Status200OK)
                                                         {
-                                                            //ActualizarBeneficiario
-                                                            //var beneficiarioModel = mapper.Map<BeneficiarioModel>(beneficiario);
-                                                            //beneficiarioModel.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
-                                                            //beneficiarioModel.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;
-                                                            //beneficiarioModel.Cobertura = unaCobertura.Cobertura;
-                                                            //beneficiarioModel.RutReclamante = unReclamante.Rut;
-                                                            //beneficiarioModel.DocladId = confirmaPago.DocladId;
-                                                            //beneficiarioModel.DocladNo = confirmaPago.DocladNo;
-                                                            //beneficiarioModel.DocladState = confirmaPago.DocladState;
-                                                            //beneficiarioRepository.ActualizarBeneficiario(beneficiarioModel);
+                                                            //CONFIRMAR CALCULO => 125
+                                                            var confirmacCalculo = ConfirmarCalculo(registroCalculo);
+                                                            if (confirmacCalculo.StatusCode == StatusCodes.Status200OK)
+                                                            {
+                                                                //REGISTRO PAGO => 122
+                                                                var guardaBeneficiarios = GuardarBeneficiarios(unReclamante.Rut, unParticipante.Rut, unaCobertura.Cobertura, liquidarSiniestroRequest, Convert.ToInt32(requestNo), unaFactura.Beneficiarios);
+
+
+                                                                var registroPago = RegistroPagoNew(requestNo, confirmacCalculo.ClaimDscrSeq, siniestro, unaFactura.Beneficiarios);
+                                                                if (registroPago.StatusCode == StatusCodes.Status200OK)
+                                                                {
+                                                                    //CONFIRMAR  PAGO => 123
+                                                                    var confirmaPago = ConfirmarPago(requestNo, registroPago, siniestro);
+                                                                    if (confirmaPago.StatusCode == StatusCodes.Status200OK)
+                                                                    {
+                                                                        //ActualizarBeneficiario
+                                                                        ActualizarBeneficiarios(unReclamante.Rut, unParticipante.Rut, unaCobertura.Cobertura, liquidarSiniestroRequest, Convert.ToInt32(requestNo), unaFactura.Beneficiarios, confirmaPago);
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        //LOG
+                                                                        RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CONFIRMAR  PAGO  (IPC 123)", siniestro.Errores.FirstOrDefault());
+                                                                        resut.StatusCode = StatusCodes.Status400BadRequest;
+                                                                        resut.Errores.Add(siniestro.Errores.FirstOrDefault());
+                                                                        return resut;
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    //LOG
+                                                                    RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL REGISTRO PAGO  (IPC 122)", siniestro.Errores.FirstOrDefault());
+                                                                    resut.StatusCode = StatusCodes.Status400BadRequest;
+                                                                    resut.Errores.Add(siniestro.Errores.FirstOrDefault());
+                                                                    return resut;
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                //LOG
+                                                                RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CONFIRMAR CALCULO  (IPC 125)", siniestro.Errores.FirstOrDefault());
+                                                                resut.StatusCode = StatusCodes.Status400BadRequest;
+                                                                resut.Errores.Add(siniestro.Errores.FirstOrDefault());
+                                                                return resut;
+                                                            }
                                                         }
-                                                        else 
+                                                        else
                                                         {
                                                             //LOG
-                                                            RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CONFIRMAR  PAGO  (IPC 123)", siniestro.Errores.FirstOrDefault());
+                                                            RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL REGISTRAR CALCULO  (IPC 124)", siniestro.Errores.FirstOrDefault());
                                                             resut.StatusCode = StatusCodes.Status400BadRequest;
                                                             resut.Errores.Add(siniestro.Errores.FirstOrDefault());
                                                             return resut;
                                                         }
                                                     }
                                                     else
-                                                    {    
+                                                    {
                                                         //LOG
-                                                        RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL REGISTRO PAGO  (IPC 122)", siniestro.Errores.FirstOrDefault());
+                                                        RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CONFIRMAR EVALUACION (IPC 121)", siniestro.Errores.FirstOrDefault());
                                                         resut.StatusCode = StatusCodes.Status400BadRequest;
                                                         resut.Errores.Add(siniestro.Errores.FirstOrDefault());
                                                         return resut;
                                                     }
+
                                                 }
                                                 else
                                                 {
                                                     //LOG
-                                                    RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CONFIRMAR CALCULO  (IPC 125)", siniestro.Errores.FirstOrDefault());
+                                                    RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL REGISTRAR EVALUACION (IPC 120)", siniestro.Errores.FirstOrDefault());
                                                     resut.StatusCode = StatusCodes.Status400BadRequest;
                                                     resut.Errores.Add(siniestro.Errores.FirstOrDefault());
                                                     return resut;
                                                 }
+
                                             }
                                             else
-                                            {
-                                                //LOG
-                                                RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL REGISTRAR CALCULO  (IPC 124)", siniestro.Errores.FirstOrDefault());
+                                            {            //log
+                                                RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CONFIRMAR REQUEST (IPC 114)", confirmar.Errores.FirstOrDefault());
                                                 resut.StatusCode = StatusCodes.Status400BadRequest;
-                                                resut.Errores.Add(siniestro.Errores.FirstOrDefault());
+                                                resut.Errores.Add(reclamantePrincipal.Errores.FirstOrDefault());
                                                 return resut;
                                             }
                                         }
                                         else
                                         {
-                                            //LOG
-                                            RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CONFIRMAR EVALUACION (IPC 121)", siniestro.Errores.FirstOrDefault());
+                                            //log
+                                            RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL REGISTRAR RECLAMANTE (IPC 113)", reclamantePrincipal.Errores.FirstOrDefault());
                                             resut.StatusCode = StatusCodes.Status400BadRequest;
-                                            resut.Errores.Add(siniestro.Errores.FirstOrDefault());
+                                            resut.Errores.Add(reclamantePrincipal.Errores.FirstOrDefault());
                                             return resut;
                                         }
+                                    }
 
-                                    }
-                                    else
-                                    {
-                                        //LOG
-                                        RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL REGISTRAR EVALUACION (IPC 120)", siniestro.Errores.FirstOrDefault());
-                                        resut.StatusCode = StatusCodes.Status400BadRequest;
-                                        resut.Errores.Add(siniestro.Errores.FirstOrDefault());
-                                        return resut;
-                                    }
+                      
                                 }
                             }
                         }
@@ -626,7 +651,7 @@ namespace CharlesApi.Data.Liquidar
         }
 
 
-        private bool GuardarBeneficiarios(string rutReclamante, string rutParticipate, string cobertura,string numeroSiniestro, string numeroInforme, int numeroSolicitud ,List<CharlesApi.Models.Request.LiquidarSiniestro.Beneficiario> beneficiarios)
+        private bool GuardarBeneficiarios(string rutReclamante, string rutParticipate, string cobertura,LiquidarSiniestroRequest liquidarSiniestroRequest, int numeroSolicitud ,List<CharlesApi.Models.Request.LiquidarSiniestro.Beneficiario> beneficiarios)
         {
             bool respuesta = false;
             try
@@ -637,8 +662,8 @@ namespace CharlesApi.Data.Liquidar
                     var beneficiarioModel = mapper.Map<BeneficiarioModel>(unBeneficiario);
                     beneficiarioModel.RutReclamante = rutReclamante;
                     beneficiarioModel.RutParticipante = rutParticipate;
-                    beneficiarioModel.NumeroSiniestro = numeroSiniestro;
-                    beneficiarioModel.NumeroInforme = numeroInforme;
+                    beneficiarioModel.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
+                    beneficiarioModel.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;
                     beneficiarioModel.NumeroSolicitud = numeroSolicitud;
                     beneficiarioModel.Cobertura = cobertura;
                     var beneficiario = beneficiarioRepository.CrearBeneficiario(beneficiarioModel);             
@@ -652,7 +677,36 @@ namespace CharlesApi.Data.Liquidar
             }
 
             return respuesta;
+        }
 
+        private bool ActualizarBeneficiarios(string rutReclamante, string rutParticipate, string cobertura, LiquidarSiniestroRequest liquidarSiniestroRequest, int numeroSolicitud, List<CharlesApi.Models.Request.LiquidarSiniestro.Beneficiario> beneficiarios, ConfirmarPagoResult confirmarPagoResult)
+        {
+            bool respuesta = false;
+            try
+            {
+                //beneficiarios                        
+                foreach (var unBeneficiario in beneficiarios)
+                {
+                    var beneficiarioModel = mapper.Map<BeneficiarioModel>(unBeneficiario);
+                    beneficiarioModel.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
+                    beneficiarioModel.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;
+                    beneficiarioModel.Cobertura = cobertura;
+                    beneficiarioModel.RutReclamante = rutReclamante;
+                    beneficiarioModel.RutParticipante = rutParticipate;
+                    beneficiarioModel.DocladId = confirmarPagoResult.DocladId;
+                    beneficiarioModel.DocladNo = confirmarPagoResult.DocladNo;
+                    beneficiarioModel.DocladState = confirmarPagoResult.DocladState;
+                    beneficiarioRepository.ActualizarBeneficiario(beneficiarioModel);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return respuesta;
         }
 
 
@@ -669,7 +723,12 @@ namespace CharlesApi.Data.Liquidar
 
                 //"claimObjSeq": 2080002080, se saca del 115 con el claimId por el Request denteo de la lista clainObjects dentro de los claimrequest               
                 registroEvaluacionRequest.ClaimObjectSeq = claimObjSeq;
-                registroEvaluacionRequest.InspectDate = Convert.ToDateTime(coberturasSiniestrada.FechaInformeLiquidador).ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
+
+                var fecha = coberturasSiniestrada.FechaInformeLiquidador.Split(' ', ':');
+                var fechaConvertida = new DateTime(Convert.ToInt32(fecha[0].Substring(0, 4)), Convert.ToInt32(fecha[0].Substring(4, 2)), Convert.ToInt32(fecha[0].Substring(6, 2)));
+
+                registroEvaluacionRequest.InspectDate = fechaConvertida.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
                 registroEvaluacionRequest.ManId = consultaPersonaResult.RowSet[0].ManId;
                 registroEvaluacionRequest.ExpertSum = factura.ValorFactura;
                 registroEvaluacionRequest.ExpertSumCurrency = factura.Moneda;
@@ -678,7 +737,7 @@ namespace CharlesApi.Data.Liquidar
                 registroEvaluacionRequest.AvCurrency = factura.Moneda;
                 registroEvaluacionRequest.InvoiceNo = factura.NumeroFactura.ToString();
 
-                var client = new RestClient("https://localhost:7186/api/registroEvaluacion/v1/registroEvaluacion");
+                var client = new RestClient($"{settings.UrlBaseEsoapApi}api/registroEvaluacion/v1/registroEvaluacion");
                 var request = new RestRequest("", Method.Post);
                 request.AddHeader("Content-Type", "application/json");
 
@@ -717,7 +776,7 @@ namespace CharlesApi.Data.Liquidar
                 registroCalculoRequest.RequestedAmount = factura.ValorFactura;
                 registroCalculoRequest.RequestedCurrency = factura.Moneda;
 
-                var client = new RestClient("https://localhost:7186/api/registroCalculo/v1/registroCalculo");
+                var client = new RestClient($"{settings.UrlBaseEsoapApi}api/registroCalculo/v1/registroCalculo");
                 var request = new RestRequest("", Method.Post);
                 request.AddHeader("Content-Type", "application/json");
 
@@ -798,7 +857,7 @@ namespace CharlesApi.Data.Liquidar
                     registroPagoRequest.Beneficiaries.Beneficiary.Add(beneficiary);
                 }
 
-                var client = new RestClient("https://localhost:7186/api/RegistroPago/v1/registroPago");
+                var client = new RestClient($"{settings.UrlBaseEsoapApi}api/RegistroPago/v1/registroPago");
                 var request = new RestRequest("", Method.Post);
                 request.AddHeader("Content-Type", "application/json");
 
@@ -872,7 +931,7 @@ namespace CharlesApi.Data.Liquidar
                 registroPagoRequest.Beneficiaries.Beneficiary.Add(beneficiary);
 
 
-                var client = new RestClient("https://localhost:7186/api/RegistroPago/v1/registroPago");
+                var client = new RestClient($"{settings.UrlBaseEsoapApi}api/RegistroPago/v1/registroPago");
                 var request = new RestRequest("", Method.Post);
                 request.AddHeader("Content-Type", "application/json");
 
@@ -898,7 +957,7 @@ namespace CharlesApi.Data.Liquidar
         {
             //115
             ConsultaSiniestroResult consultaPolizaResult = new ConsultaSiniestroResult();
-            var options = new RestClientOptions("https://localhost:7186/")
+            var options = new RestClientOptions(settings.UrlBaseEsoapApi)
             {
                 MaxTimeout = -1,
             };
@@ -907,11 +966,12 @@ namespace CharlesApi.Data.Liquidar
             var body = @"";
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var response = client.Execute<ConsultaSiniestroResult>(request);
+            consultaPolizaResult = response.Data;
 
-            if (response.IsSuccessStatusCode)
-            {
-                consultaPolizaResult = response.Data;
-            }
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    consultaPolizaResult = response.Data;
+            //}
 
             return consultaPolizaResult;
         }
@@ -921,7 +981,7 @@ namespace CharlesApi.Data.Liquidar
         {
             //109
             ConsultaPersonaResult consultaPersonaResult = new ConsultaPersonaResult();
-            var options = new RestClientOptions("https://localhost:7186/")
+            var options = new RestClientOptions(settings.UrlBaseEsoapApi)
             {
                 MaxTimeout = -1,
             };
@@ -930,11 +990,12 @@ namespace CharlesApi.Data.Liquidar
             var body = @"";
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var response = client.Execute<ConsultaPersonaResult>(request);
-
-            if (response.IsSuccessStatusCode)
-            {
-                consultaPersonaResult = response.Data;
-            }
+            consultaPersonaResult = response.Data;
+            
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    consultaPersonaResult = response.Data;
+            //}
 
             return consultaPersonaResult;
         }
@@ -942,7 +1003,7 @@ namespace CharlesApi.Data.Liquidar
         private ConsultaPersonaCompletaResult ConsultaPersonaCompleta(string egn)
         {
             ConsultaPersonaCompletaResult consultaPersonaResult = new ConsultaPersonaCompletaResult();
-            var options = new RestClientOptions("https://localhost:7186/")
+            var options = new RestClientOptions(settings.UrlBaseEsoapApi)
             {
                 MaxTimeout = -1,
             };
@@ -951,11 +1012,11 @@ namespace CharlesApi.Data.Liquidar
             var body = @"";
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var response = client.Execute<ConsultaPersonaCompletaResult>(request);
-
-            if (response.IsSuccessStatusCode)
-            {
-                consultaPersonaResult = response.Data;
-            }
+            consultaPersonaResult = response.Data;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    consultaPersonaResult = response.Data;
+            //}
 
             return consultaPersonaResult;
         }
@@ -1007,17 +1068,19 @@ namespace CharlesApi.Data.Liquidar
                 creaPersonaRequest.Contacts.Add(contact);
             }
 
-            var client = new RestClient("https://localhost:7186/api/Persona/v1/persona");
+            var client = new RestClient($"{settings.UrlBaseEsoapApi}api/Persona/v1/persona");
             var request = new RestRequest("", Method.Post);
             request.AddHeader("Content-Type", "application/json");
 
             var body = JsonConvert.SerializeObject(creaPersonaRequest);
             request.AddStringBody(body, DataFormat.Json);
-            RestResponse response = client.Execute(request);
-            if (response.IsSuccessStatusCode)
-            {
-                creaPersonaResult = JsonConvert.DeserializeObject<CreaPersonaResult>(response.Content);
-            }
+            var response = client.Execute<CreaPersonaResult>(request);
+            creaPersonaResult = response.Data;
+
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    creaPersonaResult = JsonConvert.DeserializeObject<CreaPersonaResult>(response.Content);
+            //}
 
             return creaPersonaResult;
         }
@@ -1058,17 +1121,20 @@ namespace CharlesApi.Data.Liquidar
             address.StreetName = participante.Direccion.Calle;
             address.StreetNumber = participante.Direccion.Numeracion;
             creaPersonaRequest.Addresses.Add(address);
-            var client = new RestClient("https://localhost:7186/api/Persona/v1/persona");
+
+            var client = new RestClient($"{settings.UrlBaseEsoapApi}api/Persona/v1/persona");
             var request = new RestRequest("", Method.Post);
             request.AddHeader("Content-Type", "application/json");
 
             var body = JsonConvert.SerializeObject(creaPersonaRequest);
             request.AddStringBody(body, DataFormat.Json);
-            RestResponse response = client.Execute(request);
-            if (response.IsSuccessStatusCode)
-            {
-                creaPersonaResult = JsonConvert.DeserializeObject<CreaPersonaResult>(response.Content);
-            }
+            var response = client.Execute<CreaPersonaResult>(request);
+            creaPersonaResult = response.Data;
+
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    creaPersonaResult = JsonConvert.DeserializeObject<CreaPersonaResult>(response.Content);
+            //}
 
             return creaPersonaResult;
         }
@@ -1128,17 +1194,19 @@ namespace CharlesApi.Data.Liquidar
             creaPersonaRequest.BankAccounts = new List<Models.Request.CreaPersona.BankAccount>();
             creaPersonaRequest.BankAccounts.Add(bankAccount);
 
-            var client = new RestClient("https://localhost:7186/api/Persona/v1/persona");
+            var client = new RestClient($"{settings.UrlBaseEsoapApi}api/Persona/v1/persona");
             var request = new RestRequest("", Method.Post);
             request.AddHeader("Content-Type", "application/json");
 
             var body = JsonConvert.SerializeObject(creaPersonaRequest);
             request.AddStringBody(body, DataFormat.Json);
-            RestResponse response = client.Execute(request);
-            if (response.IsSuccessStatusCode)
-            {
-                creaPersonaResult = JsonConvert.DeserializeObject<CreaPersonaResult>(response.Content);
-            }
+            var response = client.Execute<CreaPersonaResult>(request);
+            creaPersonaResult = response.Data;
+
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    creaPersonaResult = JsonConvert.DeserializeObject<CreaPersonaResult>(response.Content);
+            //}
 
             return creaPersonaResult;
         }
@@ -1247,7 +1315,7 @@ namespace CharlesApi.Data.Liquidar
             injured.Documents = documents;
             registroReclamanteRequest.Request.InjuredObjects.InjuredObject.Add(injured);
 
-            var client = new RestClient("https://localhost:7186/api/RegistroReclamante/v1/registroReclamante");
+            var client = new RestClient($"{settings.UrlBaseEsoapApi}api/RegistroReclamante/v1/registroReclamante");
             var request = new RestRequest("", Method.Post);
             request.AddHeader("Content-Type", "application/json");
 
@@ -1267,15 +1335,16 @@ namespace CharlesApi.Data.Liquidar
                 MaxTimeout = -1,
             };
             var client = new RestClient(options);
-            var request = new RestRequest($"/api/poliza/v1/poliza?policyNo={policyNo}", Method.Get);
+            var request = new RestRequest($"{settings.UrlBaseEsoapApi}api/poliza/v1/poliza?policyNo={policyNo}", Method.Get);
             var body = @"";
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var response = client.Execute<ConsultaPolizaResult>(request);
+            consultaPolizaResult = response.Data;
 
-            if (response.IsSuccessStatusCode)
-            {
-                consultaPolizaResult = response.Data;
-            }
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    consultaPolizaResult = response.Data;
+            //}
             return consultaPolizaResult;
         }
 
@@ -1283,18 +1352,19 @@ namespace CharlesApi.Data.Liquidar
         {
             ConfirmarResult confirmarResult = new ConfirmarResult() { StatusCode = StatusCodes.Status400BadRequest };
 
-            var client = new RestClient("https://localhost:7186/api/Confirmar/v1/confirmar");
+            var client = new RestClient($"{settings.UrlBaseEsoapApi}api/Confirmar/v1/confirmar");
             var request = new RestRequest("", Method.Post);
             request.AddHeader("Content-Type", "application/json");
 
             var body = JsonConvert.SerializeObject(confirmarRequest);
             request.AddStringBody(body, DataFormat.Json);
-            RestResponse response = client.Execute(request);
-            if (response.IsSuccessStatusCode)
-            {
-                confirmarResult = JsonConvert.DeserializeObject<ConfirmarResult>(response.Content);
-            }
+            var response = client.Execute<ConfirmarResult>(request);
+            confirmarResult = response.Data;
 
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    confirmarResult = JsonConvert.DeserializeObject<ConfirmarResult>(response.Content);
+            //}
 
             return confirmarResult;
         }
@@ -1309,7 +1379,7 @@ namespace CharlesApi.Data.Liquidar
             confirmarEvaluacionRequest.ClaimObjectSeq = claimObjectSeq;
             confirmarEvaluacionRequest.InspectNum = registroEvaluacionResult.InspectNum;
 
-            var client = new RestClient("https://localhost:7186/api/ConfirmarEvaluacion/v1/confirmarEvaluacion");
+            var client = new RestClient($"{settings.UrlBaseEsoapApi}api/ConfirmarEvaluacion/v1/confirmarEvaluacion");
             var request = new RestRequest("", Method.Post);
             request.AddHeader("Content-Type", "application/json");
 
@@ -1332,7 +1402,7 @@ namespace CharlesApi.Data.Liquidar
 
             ConfirmarCalculoRequest confirmarCalculoRequest = new ConfirmarCalculoRequest();
             confirmarCalculoRequest.ClaimDscrSeq = registroCalculoResult.ClaimDscrSeq;
-            var client = new RestClient("https://localhost:7186/api/ConfirmarCalculo/v1/confirmarCalculo");
+            var client = new RestClient($"{settings.UrlBaseEsoapApi}api/ConfirmarCalculo/v1/confirmarCalculo");
             var request = new RestRequest("", Method.Post);
             request.AddHeader("Content-Type", "application/json");
 
@@ -1363,7 +1433,7 @@ namespace CharlesApi.Data.Liquidar
             claimReportGroup.DocladNo = registroPagoResult.ReportNo;
             confirmarCalculoRequest.ClaimReportGroup = claimReportGroup;
             
-            var client = new RestClient("https://localhost:7186/api/ConfirmarPago/v1/confirmarPago");
+            var client = new RestClient($"{settings.UrlBaseEsoapApi}api/ConfirmarPago/v1/confirmarPago");
             var request = new RestRequest("", Method.Post);
             request.AddHeader("Content-Type", "application/json");
 

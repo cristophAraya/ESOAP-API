@@ -32,7 +32,8 @@ namespace Cl.Sura.ESoapApi.Controllers.Confirmar
             catch (Exception e)
             {
                 logger.LogError($"Error ConfirmarController.Get {e.StackTrace}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                result.Errores.Add(e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, result);       
             }
             return StatusCode(result.StatusCode, result);
         }

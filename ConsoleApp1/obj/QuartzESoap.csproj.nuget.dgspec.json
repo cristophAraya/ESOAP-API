@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ResposBitBucket\\ESoap\\ESoap\\ConsoleApp1\\QuartzESoap.csproj": {}
+    "C:\\ResposBitBucket\\ESOAP-API\\ConsoleApp1\\QuartzESoap.csproj": {}
   },
   "projects": {
-    "C:\\ResposBitBucket\\ESoap\\ESoap\\ConsoleApp1\\QuartzESoap.csproj": {
+    "C:\\ResposBitBucket\\ESOAP-API\\ConsoleApp1\\QuartzESoap.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ResposBitBucket\\ESoap\\ESoap\\ConsoleApp1\\QuartzESoap.csproj",
+        "projectUniqueName": "C:\\ResposBitBucket\\ESOAP-API\\ConsoleApp1\\QuartzESoap.csproj",
         "projectName": "QuartzESoap",
-        "projectPath": "C:\\ResposBitBucket\\ESoap\\ESoap\\ConsoleApp1\\QuartzESoap.csproj",
+        "projectPath": "C:\\ResposBitBucket\\ESOAP-API\\ConsoleApp1\\QuartzESoap.csproj",
         "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
-        "outputPath": "C:\\ResposBitBucket\\ESoap\\ESoap\\ConsoleApp1\\obj\\",
+        "outputPath": "C:\\ResposBitBucket\\ESOAP-API\\ConsoleApp1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

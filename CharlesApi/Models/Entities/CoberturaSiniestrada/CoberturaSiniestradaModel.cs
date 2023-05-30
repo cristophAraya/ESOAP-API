@@ -23,14 +23,12 @@ namespace CharlesApi.Entities.CoberturaSiniestrada
     {
         public string NumeroSiniestro { get; set; }
         public string NumeroInforme { get; set; }
-        public string NumeroSolicitud { get; set; }
-
-
+        public int NumeroSolicitud { get; set; }
         public string RutReclamante { get; set; }
         public string Cobertura { get; set; }
         public int? MontoLiquidado { get; set; }
         public string MonedaLiquidacion { get; set; }
-        public DateTime? FechaInformeLiquidador { get; set; }
+        public string FechaInformeLiquidador { get; set; }
 
         /// <summary>
         /// Constructor de la Clase CoberturaSiniestradaTo
@@ -42,7 +40,7 @@ namespace CharlesApi.Entities.CoberturaSiniestrada
             Cobertura = string.Empty;
             MontoLiquidado = 0;
             MonedaLiquidacion = string.Empty;
-            FechaInformeLiquidador = new DateTime(1900, 1, 1);
+            FechaInformeLiquidador = string.Empty;
         }
     }
 }

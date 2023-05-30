@@ -62,7 +62,7 @@ namespace CharlesApi.Models.Request.LiquidarSiniestro
         public string Cobertura { get; set; }
 
         [JsonProperty("montoLiquidado")]
-        public long MontoLiquidado { get; set; }
+        public int MontoLiquidado { get; set; }
 
         [JsonProperty("monedaLiquidacion")]
         public string MonedaLiquidacion { get; set; }
@@ -70,8 +70,8 @@ namespace CharlesApi.Models.Request.LiquidarSiniestro
         [JsonProperty("fechaInformeLiquidador")]
         public string FechaInformeLiquidador { get; set; }
 
-        [JsonProperty("beneficiarios")]
-        public List<Beneficiario> Beneficiarios { get; set; }
+        //[JsonProperty("beneficiarios")]
+        //public List<Beneficiario> Beneficiarios { get; set; }
 
         [JsonProperty("participantes")]
         public List<Participante> Participantes { get; set; }

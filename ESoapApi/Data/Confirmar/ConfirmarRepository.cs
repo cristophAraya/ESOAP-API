@@ -1,5 +1,6 @@
 ﻿
 using Cl.Sura.ESoapApi.Models.Entities.Confirmar;
+using Cl.Sura.ESoapApi.Models.Entities.Error;
 using Cl.Sura.ESoapApi.Models.Request.Confirmar;
 using Newtonsoft.Json;
 using RestSharp;
@@ -24,11 +25,16 @@ namespace Cl.Sura.ESoapApi.Data.Confirmar
                 {
                     listaConfirmarModel = JsonConvert.DeserializeObject<ConfirmarModel>(response.Content);
                 }
+                else
+                {
+                    var error = JsonConvert.DeserializeObject<ErrorModel>(response.Content);
+                    throw new TechnicalExcepction(error.Message);
+                }
             }
-            catch (Exception)
+            catch (Exception ex )
             {
 
-                throw;
+                throw ex;
             }
             return listaConfirmarModel;
         }

@@ -3,6 +3,7 @@ using CharlesApi.Controllers.Base;
 using CharlesApi.Data.Siniestro;
 using CharlesApi.Data.SiniestroLog;
 using CharlesApi.Data.TipoEvento;
+using CharlesApi.Helpers.Base;
 using CharlesApi.Helpers.Security;
 using CharlesApi.Models.Request.DeclararSiniestro;
 using CharlesApi.Models.Request.ListaEvento;
@@ -34,7 +35,7 @@ namespace CharlesApi.Controllers.RegistroDenuncio
         ISiniestroService siniestroService;
         ITipoEventoService tipoEventoService;
         ISiniestroLogService siniestroLogService;
-        public RegistroDenuncioController(ILogger<RegistroDenuncioController> logger, IWebHostEnvironment environment, ISiniestroService siniestroService, IMapper mapper, ITipoEventoService tipoEventoService, ISiniestroLogService siniestroLogService)
+        public RegistroDenuncioController(ILogger<RegistroDenuncioController> logger, IWebHostEnvironment environment, ISiniestroService siniestroService, IMapper mapper, ITipoEventoService tipoEventoService, ISiniestroLogService siniestroLogService, ISettingsConfig settings)
         {
             this.logger = logger;
             this.environment = environment;
@@ -156,7 +157,7 @@ namespace CharlesApi.Controllers.RegistroDenuncio
         {  
             //101
             ConsultaPolizaResult consultaPolizaResult = new ConsultaPolizaResult();
-            var options = new RestClientOptions("https://localhost:7186/")
+            var options = new RestClientOptions(settings.UrlBaseEsoapApi)
             {
                 MaxTimeout = -1,
             };
@@ -179,7 +180,7 @@ namespace CharlesApi.Controllers.RegistroDenuncio
             //110
             RegistroDenuncioResult registroDenuncioResult = new RegistroDenuncioResult();
 
-            var client = new RestClient("https://localhost:7186/api/RegistroDenuncio/v1/registroDenuncio");
+            var client = new RestClient($"{settings.UrlBaseEsoapApi}api/RegistroDenuncio/v1/registroDenuncio");
             var request = new RestRequest("", Method.Post);
             request.AddHeader("Content-Type", "application/json");
 

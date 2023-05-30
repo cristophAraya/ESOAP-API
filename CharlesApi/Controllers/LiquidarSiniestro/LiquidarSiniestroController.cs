@@ -87,6 +87,8 @@ namespace CharlesApi.Controllers.LiquidarSiniestro
         [HttpPost("v1/liquidarSiniestro")]
         public IActionResult Post(LiquidarSiniestroRequest liquidarSiniestroRequest)
         {
+            logger.LogInformation($"liquidarSiniestro => {DateTime.Now},LiquidarSiniestroRequest => {JsonConvert.SerializeObject(liquidarSiniestroRequest)}");
+
             LiquidarSiniestroResult liquidarSiniestroResult = new LiquidarSiniestroResult() { StatusCode = StatusCodes.Status204NoContent };
 
             try

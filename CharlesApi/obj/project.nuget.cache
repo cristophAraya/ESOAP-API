@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aOUklmsIGUBpgJDwPI/qVqEO8aUuPZqQlviVGs31A0xmJforJopSMjw0n/Zx1oOamwgP3aafX31MCXCKicmDbA==",
+  "dgSpecHash": "XoGSwb8ocnHSaPuQfWgxXTiR47OTnSU2zYCS9VcAVdn/Cyj9BFHyA2WT6N3TUR96FkVnSOi7dnFcEyycCglqlw==",
   "success": true,
-  "projectFilePath": "C:\\ResposBitBucket\\ESoap\\ESoap\\CharlesApi\\CharlesApi.csproj",
+  "projectFilePath": "C:\\ResposBitBucket\\ESOAP-API\\CharlesApi\\CharlesApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\crist\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

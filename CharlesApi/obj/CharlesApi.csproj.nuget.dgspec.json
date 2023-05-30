@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ResposBitBucket\\ESoap\\ESoap\\CharlesApi\\CharlesApi.csproj": {}
+    "C:\\ResposBitBucket\\ESOAP-API\\CharlesApi\\CharlesApi.csproj": {}
   },
   "projects": {
-    "C:\\ResposBitBucket\\ESoap\\ESoap\\CharlesApi\\CharlesApi.csproj": {
+    "C:\\ResposBitBucket\\ESOAP-API\\CharlesApi\\CharlesApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ResposBitBucket\\ESoap\\ESoap\\CharlesApi\\CharlesApi.csproj",
+        "projectUniqueName": "C:\\ResposBitBucket\\ESOAP-API\\CharlesApi\\CharlesApi.csproj",
         "projectName": "CharlesApi",
-        "projectPath": "C:\\ResposBitBucket\\ESoap\\ESoap\\CharlesApi\\CharlesApi.csproj",
+        "projectPath": "C:\\ResposBitBucket\\ESOAP-API\\CharlesApi\\CharlesApi.csproj",
         "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
-        "outputPath": "C:\\ResposBitBucket\\ESoap\\ESoap\\CharlesApi\\obj\\",
+        "outputPath": "C:\\ResposBitBucket\\ESOAP-API\\CharlesApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

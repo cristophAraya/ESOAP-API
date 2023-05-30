@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ResposBitBucket\\ESoap\\ESoap\\ESoapApi\\ESoapApi.csproj": {}
+    "C:\\ResposBitBucket\\ESOAP-API\\ESoapApi\\ESoapApi.csproj": {}
   },
   "projects": {
-    "C:\\ResposBitBucket\\ESoap\\ESoap\\ESoapApi\\ESoapApi.csproj": {
+    "C:\\ResposBitBucket\\ESOAP-API\\ESoapApi\\ESoapApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ResposBitBucket\\ESoap\\ESoap\\ESoapApi\\ESoapApi.csproj",
+        "projectUniqueName": "C:\\ResposBitBucket\\ESOAP-API\\ESoapApi\\ESoapApi.csproj",
         "projectName": "ESoapApi",
-        "projectPath": "C:\\ResposBitBucket\\ESoap\\ESoap\\ESoapApi\\ESoapApi.csproj",
+        "projectPath": "C:\\ResposBitBucket\\ESOAP-API\\ESoapApi\\ESoapApi.csproj",
         "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
-        "outputPath": "C:\\ResposBitBucket\\ESoap\\ESoap\\ESoapApi\\obj\\",
+        "outputPath": "C:\\ResposBitBucket\\ESOAP-API\\ESoapApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -122,7 +122,7 @@ namespace CharlesApi.Repository.Beneficiario
             using (IDbConnection db = new SqlConnection(GetDatabase()))
             {
                 string query = @"UPDATE Dbo.Beneficiario SET DocladId=@DocladId, DocladNo=@DocladNo, DocladState=@DocladState 
-                                WHERE NumeroSiniestro=@NumeroSiniestro AND  NumeroInforme= @NumeroInforme AND RutReclamante = @RutReclamante AND Cobertura = @Cobertura AND Rut=@Rut";
+                                WHERE NumeroSiniestro=@NumeroSiniestro AND  NumeroInforme= @NumeroInforme AND RutReclamante = @RutReclamante  AND RutParticipante = @RutParticipante AND Cobertura = @Cobertura AND Rut=@Rut";
                 int i = db.Execute(query, beneficiarioModel);
                 result = i >= 0;
             }
