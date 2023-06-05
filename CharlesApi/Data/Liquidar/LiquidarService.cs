@@ -392,6 +392,8 @@ namespace CharlesApi.Data.Liquidar
                 //CONFIRMAR TODO
                 //Consulta Y recuperacion Siniestro
                 //validar siniestro al 115
+
+                logger.LogInformation($"ConsultaSiniestro => {DateTime.Now.ToString()}");
                 var siniestro = ConsultaSiniestro(liquidarSiniestroRequest.NumeroSiniestro);
                 if (siniestro.StatusCode == StatusCodes.Status200OK)
                 {
@@ -402,7 +404,8 @@ namespace CharlesApi.Data.Liquidar
                         foreach (var unaCobertura in unReclamante.CoberturasSiniestradas)
                         {
                             foreach (var unParticipante in unaCobertura.Participantes)
-                            {                             
+                            {
+                                logger.LogInformation($"ConsultaPoliza => {DateTime.Now.ToString()}");
                                 var poliza = ConsultaPoliza(siniestro.PolicyReg.ToString());
 
                                 //DESDE ACA ES POR FACTURAS                            
@@ -413,9 +416,12 @@ namespace CharlesApi.Data.Liquidar
                                     reclamanteModelBD.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;
                                     reclamanteModelBD.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
                                     reclamanteModelBD.Cobertura = unaCobertura.Cobertura;
+
+                                    logger.LogInformation($"ObtenerReclamante => {DateTime.Now.ToString()}");
                                     reclamanteModelBD = reclamanteRepository.ObtenerReclamante(reclamanteModelBD);
                                     if (reclamanteModelBD == null)
                                     {
+                                        logger.LogInformation($"ConsultaPersona => {DateTime.Now.ToString()}");
                                         var persona = ConsultaPersona(unReclamante.Rut);
                                         if (persona.StatusCode == StatusCodes.Status200OK && persona.TotalRowCount == 0)
                                         {
@@ -464,7 +470,8 @@ namespace CharlesApi.Data.Liquidar
                                             //    return confirmarLiquidacionResult;
                                         }
 
-                                        //REGISTRAR RECLAMANTE + participante + cobertura => 113   
+                                        //REGISTRAR RECLAMANTE + participante + cobertura => 113
+                                        logger.LogInformation($"RegistroReclamante => {DateTime.Now.ToString()}");
                                         var reclamantePrincipal = RegistroReclamante(persona, siniestro, unaCobertura, unReclamante.CodigoTipoReclamante, participante);
 
                                         if (reclamantePrincipal.StatusCode == StatusCodes.Status200OK)
@@ -968,6 +975,8 @@ namespace CharlesApi.Data.Liquidar
             var response = client.Execute<ConsultaSiniestroResult>(request);
             consultaPolizaResult = response.Data;
 
+            logger.LogInformation($"ConsultaSiniestro => {DateTime.Now.ToString()}, JSON => {JsonConvert.SerializeObject(consultaPolizaResult)}");
+
             //if (response.IsSuccessStatusCode)
             //{
             //    consultaPolizaResult = response.Data;
@@ -991,7 +1000,9 @@ namespace CharlesApi.Data.Liquidar
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var response = client.Execute<ConsultaPersonaResult>(request);
             consultaPersonaResult = response.Data;
-            
+
+            logger.LogInformation($"ConsultaPersona => {DateTime.Now.ToString()}, JSON => {JsonConvert.SerializeObject(consultaPersonaResult)}");
+
             //if (response.IsSuccessStatusCode)
             //{
             //    consultaPersonaResult = response.Data;
@@ -1029,7 +1040,7 @@ namespace CharlesApi.Data.Liquidar
 
             CreaPersonaRequest creaPersonaRequest = new CreaPersonaRequest();
             creaPersonaRequest.ManComp = 1;
-            creaPersonaRequest.BirthDate = reclamante.FechaNacimiento;
+            creaPersonaRequest.BirthDate = reclamante.FechaNacimiento.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'"); ;
             creaPersonaRequest.Egn = reclamante.Rut;
             creaPersonaRequest.Gname = reclamante.PrimerNombre;
             creaPersonaRequest.Sname = reclamante.Apellidos;
@@ -1145,7 +1156,7 @@ namespace CharlesApi.Data.Liquidar
 
             CreaPersonaRequest creaPersonaRequest = new CreaPersonaRequest();
             creaPersonaRequest.ManComp = 1;
-            creaPersonaRequest.BirthDate = beneficiario.FechaNacimiento;
+            creaPersonaRequest.BirthDate = beneficiario.FechaNacimiento.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'"); ;
             creaPersonaRequest.Egn = beneficiario.Rut;
             creaPersonaRequest.Gname = beneficiario.PrimerNombre;
             creaPersonaRequest.Sname = beneficiario.Apellidos;
@@ -1219,7 +1230,7 @@ namespace CharlesApi.Data.Liquidar
             RegistroReclamanteRequest registroReclamanteRequest = new RegistroReclamanteRequest();
             registroReclamanteRequest.ClaimNo = consultaSiniestroResult.ClaimId.ToString();// "20700001714";
             registroReclamanteRequest.Request = new CharlesApi.Models.Request.RegistroReclamante.Request();
-            registroReclamanteRequest.Request.RequestDate = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            registroReclamanteRequest.Request.RequestDate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
             registroReclamanteRequest.Request.ClaimantId = consultaPersonaResult.RowSet[0].ManId;
 
             var tipoReclamante = tipoReclamanteRepository.ObtenerTipoReclamante(new Entities.TipoReclamante.TipoReclamanteModel() { CodigoTipoReclamanteCharles = codigoTipoReclamanteCharles });
@@ -1321,8 +1332,13 @@ namespace CharlesApi.Data.Liquidar
 
             var body = JsonConvert.SerializeObject(registroReclamanteRequest);
             request.AddStringBody(body, DataFormat.Json);
-            RestResponse response = client.Execute(request);
-            registroReclamanteResult = JsonConvert.DeserializeObject<RegistroReclamanteResult>(response.Content);     
+            var response = client.Execute<RegistroReclamanteResult>(request);
+            registroReclamanteResult = response.Data;
+
+            logger.LogInformation($"RegistroReclamante => {DateTime.Now.ToString()}, JSON INPUT => {body}");
+            logger.LogInformation($"RegistroReclamante => {DateTime.Now.ToString()}, JSON RESPONSE => {registroReclamanteResult}");
+
+
 
             return registroReclamanteResult;
         }
@@ -1340,6 +1356,9 @@ namespace CharlesApi.Data.Liquidar
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var response = client.Execute<ConsultaPolizaResult>(request);
             consultaPolizaResult = response.Data;
+
+            logger.LogInformation($"ConsultaPoliza => {DateTime.Now.ToString()}, JSON => {JsonConvert.SerializeObject(consultaPolizaResult)}");
+
 
             //if (response.IsSuccessStatusCode)
             //{

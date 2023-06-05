@@ -246,7 +246,7 @@ namespace CharlesApi.Controllers.ReclamantePrincipal
 
             CreaPersonaRequest creaPersonaRequest = new CreaPersonaRequest();
             creaPersonaRequest.ManComp = 1;
-            creaPersonaRequest.BirthDate = reclamantePrincipalResquest.Reclamante.FechaNacimiento;
+            creaPersonaRequest.BirthDate = reclamantePrincipalResquest.Reclamante.FechaNacimiento.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'"); ;
             creaPersonaRequest.Egn = reclamantePrincipalResquest.Reclamante.Rut;
             creaPersonaRequest.Gname = reclamantePrincipalResquest.Reclamante.PrimerNombre;
             creaPersonaRequest.Sname = reclamantePrincipalResquest.Reclamante.Apellidos;

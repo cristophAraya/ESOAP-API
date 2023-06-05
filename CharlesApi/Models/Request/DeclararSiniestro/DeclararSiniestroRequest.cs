@@ -19,7 +19,7 @@ namespace CharlesApi.Models.Request.DeclararSiniestro
 
         [JsonProperty("fechaSiniestro")]
 
-        public string FechaSiniestro { get; set; }
+        public DateTime FechaSiniestro { get; set; }
         //ano+mes+dia con horas ANSI
         //
 
@@ -31,8 +31,8 @@ namespace CharlesApi.Models.Request.DeclararSiniestro
 
         [JsonProperty("tipoEvento")]
         public string TipoEvento { get; set; }
-        [JsonProperty("codigoTipoEvento")]
-        public string CodigoTipoEvento { get; set; }
+        [JsonProperty("codigoEvento")]
+        public string CodigoEvento { get; set; }
     }
 
 }

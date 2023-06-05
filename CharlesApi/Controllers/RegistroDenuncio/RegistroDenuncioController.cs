@@ -76,7 +76,7 @@ namespace CharlesApi.Controllers.RegistroDenuncio
                 //Existe Poliza ? y validar contra patnte del request
                 if (consultaPolizaResult.StatusCode == StatusCodes.Status200OK)
                 {
-                    var tipoEventoRequest = new Request.TipoEvento.TipoEventoRequest() { CodigoTipoEventoCharles = declararSiniestroRequest.CodigoTipoEvento };
+                    var tipoEventoRequest = new Request.TipoEvento.TipoEventoRequest() { CodigoTipoEventoCharles = declararSiniestroRequest.CodigoEvento };
                     var tipoEvento = tipoEventoService.ObtenerTipoEvento(tipoEventoRequest);
 
                     RegistroDenunioRequest registroDenuncioRequest = new RegistroDenunioRequest();
@@ -89,12 +89,12 @@ namespace CharlesApi.Controllers.RegistroDenuncio
 
                     CultureInfo provider = CultureInfo.InvariantCulture;
                     // It throws Argument null exception
-                    var fecha = declararSiniestroRequest.FechaSiniestro.Split(' ', ':');
-                    var fechaConvertida = new DateTime(Convert.ToInt32(fecha[0].Substring(0, 4)), Convert.ToInt32(fecha[0].Substring(4, 2)), Convert.ToInt32(fecha[0].Substring(6, 2)));
+                    //var fecha = declararSiniestroRequest.FechaSiniestro.Split(' ', ':');
+                    //var fechaConvertida = new DateTime(Convert.ToInt32(fecha[0].Substring(0, 4)), Convert.ToInt32(fecha[0].Substring(4, 2)), Convert.ToInt32(fecha[0].Substring(6, 2)));
                     
-                   // DateTime dateTime10 = DateTime.ParseExact(declararSiniestroRequest.FechaSiniestro, "YYYYMMDD HH:mm:ss", provider);
+                     //sDateTime dateTime10 = DateTime.ParseExact(declararSiniestroRequest.FechaSiniestro, "YYYYMMDD HH:mm:ss", provider);
 
-                    registroDenuncioRequest.ClaimGroup.EventDate = fechaConvertida.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                    registroDenuncioRequest.ClaimGroup.EventDate = declararSiniestroRequest.FechaSiniestro.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");// fechaConvertida.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
                     registroDenuncioRequest.ClaimGroup.EventDescription = declararSiniestroRequest.RelatoSiniestro;// "Relato del siniestro texto libre";
                     registroDenuncioRequest.ClaimGroup.EventCountry = "CL";
                     registroDenuncioRequest.ClaimGroup.EventPlace = declararSiniestroRequest.LugarSiniestro;// "Lugar del siniestro texto libre";

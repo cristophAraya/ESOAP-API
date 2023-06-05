@@ -26,7 +26,7 @@ namespace CharlesApi.Models.Request.LiquidarSiniestro
         [JsonProperty("monedaProvision")]
         public string MonedaProvision { get; set; }
         [JsonProperty("fechaNacimiento")]
-        public string FechaNacimiento { get; set; }
+        public DateTime FechaNacimiento { get; set; }
 
         [JsonProperty("rut")]
         public string Rut { get; set; }
@@ -110,7 +110,7 @@ namespace CharlesApi.Models.Request.LiquidarSiniestro
         [JsonProperty("porcentaje")]
         public int Porcentaje { get; set; }
         [JsonProperty("fechaNacimiento")]
-        public string FechaNacimiento { get; set; }
+        public DateTime FechaNacimiento { get; set; }
 
         [JsonProperty("rut")]
         public string Rut { get; set; }

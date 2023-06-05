@@ -30,9 +30,9 @@ namespace Cl.Sura.ESoapApi.Controllers.RegistroEvaluacion
                 result = this.registroDenuncioService.RegistroEvaluacion(registroDenuncioRequest);
             }
             catch (Exception e)
-            {
-                logger.LogError($"Error RegistroEvaluacionController.Get {e.StackTrace}");
-                result.Errores.Add(e.Message);        
+            {              
+                result.Errores.Add(e.Message);
+                logger.LogError($"Error RegistroEvaluacionController.Get {e.Message}, JSON {Newtonsoft.Json.JsonConvert.SerializeObject(result)}");
                 return StatusCode(StatusCodes.Status500InternalServerError, result);
             }
             return StatusCode(result.StatusCode, result);

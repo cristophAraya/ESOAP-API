@@ -33,10 +33,10 @@ namespace Cl.Sura.ESoapApi.Data.RegistroReclamante
                     throw new TechnicalExcepction(error.Message);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             return registroDenuncio;
         }

@@ -32,7 +32,7 @@ namespace CharlesApi.Models.Request.ReclamantePrincipal
         public string TipoReclamante { get; set; }
 
         [JsonProperty("fechaNacimiento")]
-        public string FechaNacimiento { get; set; }
+        public DateTime FechaNacimiento { get; set; }
 
         [JsonProperty("rut")]
         public string Rut { get; set; }
