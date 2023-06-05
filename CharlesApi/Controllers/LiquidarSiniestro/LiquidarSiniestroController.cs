@@ -99,7 +99,9 @@ namespace CharlesApi.Controllers.LiquidarSiniestro
             catch (Exception e)
             {
                 logger.LogError($"Error LiquidarSiniestroController.Get {e.StackTrace}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                liquidarSiniestroResult.Errores.Add(e.Message);
+                liquidarSiniestroResult.StatusCode = StatusCodes.Status400BadRequest;
+                return StatusCode(StatusCodes.Status400BadRequest, liquidarSiniestroResult);
             }
 
             return StatusCode(liquidarSiniestroResult.StatusCode, liquidarSiniestroResult);

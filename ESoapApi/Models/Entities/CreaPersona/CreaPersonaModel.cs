@@ -83,7 +83,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.CreaPersona
 
         [JsonProperty("blockNumber")]
 
-        public long BlockNumber { get; set; }
+        public long? BlockNumber { get; set; }
 
         [JsonProperty("city")]
         public string City { get; set; }

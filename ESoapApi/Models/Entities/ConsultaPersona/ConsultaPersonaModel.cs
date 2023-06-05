@@ -29,7 +29,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPersona
         public long ManComp { get; set; }
 
         [JsonProperty("birthDate")]
-        public DateTimeOffset BirthDate { get; set; }
+        public DateTimeOffset? BirthDate { get; set; }
 
         [JsonProperty("egn")]
 

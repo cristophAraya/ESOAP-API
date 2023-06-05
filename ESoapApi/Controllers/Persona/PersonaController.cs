@@ -70,7 +70,10 @@ namespace Cl.Sura.ESoapApi.Controllers.Persona
             catch (Exception e)
             {
                 logger.LogError($"Error PolizaController.Get {e.StackTrace}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                result.Errores.Add(e.Message);
+                result.StatusCode = StatusCodes.Status400BadRequest;
+                result.StatusCode = StatusCodes.Status400BadRequest;
+                return StatusCode(StatusCodes.Status400BadRequest, result);
             }
             return StatusCode(result.StatusCode, result);
         }

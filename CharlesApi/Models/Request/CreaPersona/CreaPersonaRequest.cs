@@ -7,7 +7,7 @@ namespace CharlesApi.Models.Request.CreaPersona
         [JsonProperty("manComp")]
         public int ManComp { get; set; }
 
-        [JsonProperty("birthDate")]
+        [JsonProperty("birthDate", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string BirthDate { get; set; }
 
         [JsonProperty("egn")]
@@ -15,6 +15,8 @@ namespace CharlesApi.Models.Request.CreaPersona
 
         [JsonProperty("gname")]
         public string Gname { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
         [JsonProperty("sname")]
         public string Sname { get; set; }

@@ -1,5 +1,0 @@
-2023-03-24T14:45:47.1891192-03:00  [INF] Now listening on: "https://localhost:7213" (d826f4b8)
-2023-03-24T14:45:47.2403193-03:00  [INF] Now listening on: "http://localhost:5248" (d826f4b8)
-2023-03-24T14:45:47.2782398-03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2023-03-24T14:45:47.3208136-03:00  [INF] Hosting environment: "Development" (c3307c92)
-2023-03-24T14:45:47.3272404-03:00  [INF] Content root path: "C:\ResposBitBucket\ESoap\ESoap\CharlesApi" (b5d60022)

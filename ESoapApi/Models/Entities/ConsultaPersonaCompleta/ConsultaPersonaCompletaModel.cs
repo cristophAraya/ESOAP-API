@@ -88,7 +88,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPersonaCompleta
 
         [JsonProperty("cityCode")]
 
-        public long CityCode { get; set; }
+        public string CityCode { get; set; }
 
         [JsonProperty("country")]
         public string Country { get; set; }
@@ -98,11 +98,11 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPersonaCompleta
 
         [JsonProperty("countryState")]
 
-        public long CountryState { get; set; }
+        public string CountryState { get; set; }
 
         [JsonProperty("entranceNumber")]
 
-        public long EntranceNumber { get; set; }
+        public string EntranceNumber { get; set; }
 
         [JsonProperty("floorNumber")]
         public object FloorNumber { get; set; }
@@ -118,14 +118,14 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPersonaCompleta
 
         [JsonProperty("postCode")]
 
-        public long PostCode { get; set; }
+        public string PostCode { get; set; }
 
         [JsonProperty("primaryFlag")]
         public string PrimaryFlag { get; set; }
 
         [JsonProperty("quarterId")]
 
-        public long QuarterId { get; set; }
+        public string QuarterId { get; set; }
 
         [JsonProperty("quarterName")]
         public object QuarterName { get; set; }

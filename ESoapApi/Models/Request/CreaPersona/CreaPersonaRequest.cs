@@ -8,31 +8,35 @@ namespace Cl.Sura.ESoapApi.Models.Request.CreaPersona
         [JsonProperty("manComp")]
         public int ManComp { get; set; }
 
-        [JsonProperty("birthDate")]
+       
+        [JsonProperty("birthDate", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public DateTimeOffset BirthDate { get; set; }
 
         [JsonProperty("egn")]
         public string Egn { get; set; }
-
-        [JsonProperty("gname")]
+       
+        [JsonProperty("gname", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string Gname { get; set; }
-
-        [JsonProperty("sname")]
+         
+        [JsonProperty("name", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string Name { get; set; }
+       
+        [JsonProperty("sname", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string Sname { get; set; }
-
-        [JsonProperty("fname")]
+       
+        [JsonProperty("fname", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string Fname { get; set; }
-
-        [JsonProperty("sex")]
+       
+        [JsonProperty("sex", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public int Sex { get; set; }
-
-        [JsonProperty("addresses")]
+       
+        [JsonProperty("addresses", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public Address[] Addresses { get; set; }
-
-        [JsonProperty("contacts")]
+       
+        [JsonProperty("contacts", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public Contact[] Contacts { get; set; }
-
-        [JsonProperty("bankAccountsPersona")]
+       
+        [JsonProperty("bankAccountsPersona", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public BankAccountPersona[] BankAccounts { get; set; }
     }
 

@@ -11,6 +11,7 @@ using CharlesApi.Data.TipoEvento;
 using CharlesApi.Data.TipoReclamante;
 using CharlesApi.Helpers.Base;
 using CharlesApi.Repository.Beneficiario;
+using CharlesApi.Repository.Cobertura;
 using CharlesApi.Repository.CoberturaSiniestrada;
 using CharlesApi.Repository.Participante;
 using CharlesApi.Repository.Reclamante;
@@ -77,6 +78,8 @@ namespace CharlesApi
 
             services.AddSingleton<ICoberturaSiniestradaService, CoberturaSiniestradaService>();
             services.AddSingleton<ICoberturaSiniestradaRepository, CoberturaSiniestradaRepository>();
+
+            services.AddSingleton<ICoberturaRepository, CoberturaRepository>();
 
             services.AddSingleton<IBeneficiarioService, BeneficiarioService>();
             services.AddSingleton<IBeneficiarioRepository, BeneficiarioRepository>();

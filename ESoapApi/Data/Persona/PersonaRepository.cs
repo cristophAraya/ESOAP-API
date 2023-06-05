@@ -34,10 +34,10 @@ namespace Cl.Sura.ESoapApi.Data.Persona
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             return consultaPersonaModel;
         }
@@ -59,10 +59,10 @@ namespace Cl.Sura.ESoapApi.Data.Persona
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex )
             {
 
-                throw;
+                throw ex;
             }
             return consultaPersonaModel;
         }
