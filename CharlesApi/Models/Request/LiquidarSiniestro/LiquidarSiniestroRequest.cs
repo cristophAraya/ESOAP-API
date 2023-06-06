@@ -170,7 +170,7 @@ namespace CharlesApi.Models.Request.LiquidarSiniestro
 
     public partial class Direccion
     {
-        [JsonProperty("direcion")]
+        [JsonProperty("direccion")]
         public string Direcion { get; set; }
 
         [JsonProperty("casaDepto")]
@@ -203,8 +203,8 @@ namespace CharlesApi.Models.Request.LiquidarSiniestro
         [JsonProperty("tipoContacto")]
         public string TipoContacto { get; set; }
 
-        [JsonProperty("formaContacto")]
-        public string FormaContacto { get; set; }
+        [JsonProperty("informacionContacto")]
+        public string InformacionContacto { get; set; }
     }
 
     public partial class ReclamanteViaContacto

@@ -36,7 +36,7 @@ namespace Cl.Sura.ESoapApi.Models.Request.CreaPersona
         [JsonProperty("contacts", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public Contact[] Contacts { get; set; }
        
-        [JsonProperty("bankAccountsPersona", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        [JsonProperty("bankAccounts", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public BankAccountPersona[] BankAccounts { get; set; }
     }
 

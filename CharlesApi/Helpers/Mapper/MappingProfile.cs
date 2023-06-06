@@ -113,7 +113,7 @@ namespace CharlesApi.Helpers.Mapper
                 .ForMember(a => a.CasaDepto, b => b.MapFrom(u => u.Direccion.CasaDepto))
                 .ForMember(a => a.Numeracion, b => b.MapFrom(u => u.Direccion.Numeracion))
                 .ForMember(a => a.TipoContacto, b => b.MapFrom(u => u.ViaContacto.TipoContacto))
-                .ForMember(a => a.FormaContacto, b => b.MapFrom(u => u.ViaContacto.FormaContacto))
+                .ForMember(a => a.FormaContacto, b => b.MapFrom(u => u.ViaContacto.InformacionContacto))
                 .ForMember(a => a.Moneda, b => b.MapFrom(u => u.CuentaBancaria.Moneda))
                 .ForMember(a => a.NumeroCuenta, b => b.MapFrom(u => u.CuentaBancaria.NumeroCuenta))
                 .ForMember(a => a.Banco, b => b.MapFrom(u => u.CuentaBancaria.Banco)).ReverseMap();

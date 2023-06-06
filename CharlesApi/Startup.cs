@@ -10,6 +10,7 @@ using CharlesApi.Data.SiniestroLog;
 using CharlesApi.Data.TipoEvento;
 using CharlesApi.Data.TipoReclamante;
 using CharlesApi.Helpers.Base;
+using CharlesApi.Repository.Banco;
 using CharlesApi.Repository.Beneficiario;
 using CharlesApi.Repository.Cobertura;
 using CharlesApi.Repository.CoberturaSiniestrada;
@@ -80,6 +81,7 @@ namespace CharlesApi
             services.AddSingleton<ICoberturaSiniestradaRepository, CoberturaSiniestradaRepository>();
 
             services.AddSingleton<ICoberturaRepository, CoberturaRepository>();
+            services.AddSingleton<IBancoRepository, BancoRepository>();
 
             services.AddSingleton<IBeneficiarioService, BeneficiarioService>();
             services.AddSingleton<IBeneficiarioRepository, BeneficiarioRepository>();

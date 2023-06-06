@@ -32,19 +32,15 @@ using CharlesApi.Entities.SiniestroLog;
 using CharlesApi.Helpers.Base;
 using CharlesApi.Models.Request.Confirmar;
 using CharlesApi.Models.Request.ConfirmarCalculo;
-using CharlesApi.Models.Request.ConfirmarLiquidacion;
 using CharlesApi.Models.Request.ConfirmarPago;
 using CharlesApi.Models.Request.CreaPersona;
-using CharlesApi.Models.Request.DeclararSiniestro;
 using CharlesApi.Models.Request.LiquidarSiniestro;
-using CharlesApi.Models.Request.ReclamantePrincipal;
 using CharlesApi.Models.Request.RegistroCalculo;
 using CharlesApi.Models.Request.RegistroEvaluacion;
 using CharlesApi.Models.Request.RegistroPago;
 using CharlesApi.Models.Request.RegistroReclamante;
 using CharlesApi.Models.Result.ConfirmarCalculo;
 using CharlesApi.Models.Result.ConfirmarEvaluacion;
-using CharlesApi.Models.Result.ConfirmarLiquidacion;
 using CharlesApi.Models.Result.ConfirmarPago;
 using CharlesApi.Models.Result.ConsultaPersona;
 using CharlesApi.Models.Result.ConsultaPersonaCompleta;
@@ -52,11 +48,11 @@ using CharlesApi.Models.Result.ConsultaPoliza;
 using CharlesApi.Models.Result.ConsultaSiniestro;
 using CharlesApi.Models.Result.CreaPersona;
 using CharlesApi.Models.Result.LiquidarSiniestro;
-using CharlesApi.Models.Result.ReclamantePrincipal;
 using CharlesApi.Models.Result.RegistroCalculo;
 using CharlesApi.Models.Result.RegistroEvaluacion;
 using CharlesApi.Models.Result.RegistroPago;
 using CharlesApi.Models.Result.RegistroReclamante;
+using CharlesApi.Repository.Banco;
 using CharlesApi.Repository.Beneficiario;
 using CharlesApi.Repository.Cobertura;
 using CharlesApi.Repository.CoberturaSiniestrada;
@@ -64,10 +60,6 @@ using CharlesApi.Repository.Participante;
 using CharlesApi.Repository.Reclamante;
 using CharlesApi.Repository.SiniestroLog;
 using CharlesApi.Repository.TipoReclamante;
-using CharlesApi.Request.CoberturaSiniestrada;
-using CharlesApi.Request.Participante;
-using CharlesApi.Request.Reclamante;
-using Microsoft.Win32;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -87,9 +79,10 @@ namespace CharlesApi.Data.Liquidar
         private IBeneficiarioRepository beneficiarioRepository;
         private ISiniestroLogRepository siniestroLogRepository;
         private ITipoReclamanteRepository  tipoReclamanteRepository;
+        private IBancoRepository bancoRepository;
         private ILogger<LiquidarService> logger;
         private IMapper mapper;        
-        public LiquidarService(ISettingsConfig settings,  IMapper mapper, IReclamanteRepository reclamanteRepository, ICoberturaSiniestradaRepository coberturaSiniestradaRepository, IBeneficiarioRepository beneficiarioRepository, ILogger<LiquidarService> logger, ISiniestroLogRepository siniestroLogRepository, ITipoReclamanteRepository tipoReclamanteRepository, IParticipanteRepository participanteRepository, ICoberturaRepository coberturaRepository)
+        public LiquidarService(ISettingsConfig settings,  IMapper mapper, IReclamanteRepository reclamanteRepository, ICoberturaSiniestradaRepository coberturaSiniestradaRepository, IBeneficiarioRepository beneficiarioRepository, ILogger<LiquidarService> logger, ISiniestroLogRepository siniestroLogRepository, ITipoReclamanteRepository tipoReclamanteRepository, IParticipanteRepository participanteRepository, ICoberturaRepository coberturaRepository, IBancoRepository bancoRepository)
         
         {
             this.logger = logger;
@@ -102,6 +95,7 @@ namespace CharlesApi.Data.Liquidar
             this.tipoReclamanteRepository = tipoReclamanteRepository;
             this.participanteRepository = participanteRepository;
             this.coberturaRepository = coberturaRepository;
+            this.bancoRepository = bancoRepository;
         }
 
         public void Dispose()
@@ -431,7 +425,7 @@ namespace CharlesApi.Data.Liquidar
                                             }
                                             else
                                             {
-                                                RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CREAR PERSONA (IPC 107)", creaPersona.Errores.FirstOrDefault());
+                                                RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CREAR PERSONA RECLAMANTE (IPC 107)", creaPersona.Errores.FirstOrDefault());
                                                 liquidarSiniestroResult.StatusCode = StatusCodes.Status400BadRequest;
                                                 liquidarSiniestroResult.Errores.Add(creaPersona.Errores.FirstOrDefault());
                                                 return liquidarSiniestroResult;
@@ -440,7 +434,7 @@ namespace CharlesApi.Data.Liquidar
                                         }
                                         if (persona.StatusCode != StatusCodes.Status200OK)
                                         {
-                                            RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CONSULTAR PERSONA (IPC 109)", persona.Errores.FirstOrDefault());
+                                            RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CONSULTAR PERSONA RECLAMANTE (IPC 109)", persona.Errores.FirstOrDefault());
                                             liquidarSiniestroResult.StatusCode = StatusCodes.Status400BadRequest;
                                             liquidarSiniestroResult.Errores.Add(persona.Errores.FirstOrDefault());
                                             return liquidarSiniestroResult;
@@ -455,18 +449,18 @@ namespace CharlesApi.Data.Liquidar
                                             }
                                             else
                                             {
-                                                //  RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CREAR PERSONA (IPC 107)", creaPersona.Errores.FirstOrDefault());
-                                                //  liquidarSiniestroRequest.StatusCode = StatusCodes.Status400BadRequest;
-                                                //   liquidarSiniestroRequest.Errores.Add(creaPersona.Errores.FirstOrDefault());
-                                                // return liquidarSiniestroRequest;
+                                                RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CREAR PERSONA PARTICIPANTE (IPC 107)", creaPersona.Errores.FirstOrDefault());
+                                                liquidarSiniestroResult.StatusCode = StatusCodes.Status400BadRequest;
+                                                liquidarSiniestroResult.Errores.Add(creaPersona.Errores.FirstOrDefault());
+                                                return liquidarSiniestroResult;
                                             }
                                         }
                                         if (participante.StatusCode != StatusCodes.Status200OK)
                                         {
-                                            //    RegistraSiniestroLog(confirmarLiquidacionRequest, "PROBLEMAS AL CONSULTAR PERSONA (IPC 109)", persona.Errores.FirstOrDefault());
-                                            //    confirmarLiquidacionResult.StatusCode = StatusCodes.Status400BadRequest;
-                                            //    confirmarLiquidacionResult.Errores.Add(persona.Errores.FirstOrDefault());
-                                            //    return confirmarLiquidacionResult;
+                                            RegistraSiniestroLog(liquidarSiniestroRequest, "PROBLEMAS AL CONSULTAR PERSONA PARTICIPANTE(IPC 109)", persona.Errores.FirstOrDefault());
+                                            liquidarSiniestroResult.StatusCode = StatusCodes.Status400BadRequest;
+                                            liquidarSiniestroResult.Errores.Add(persona.Errores.FirstOrDefault());
+                                            return liquidarSiniestroResult;
                                         }
 
                                         //REGISTRAR RECLAMANTE + participante + cobertura => 113
@@ -822,11 +816,28 @@ namespace CharlesApi.Data.Liquidar
 
                 foreach (var unBeneficiario in beneficiarios)
                 {
+
+                    if (unBeneficiario.CuentaBancaria == null || unBeneficiario.CuentaBancaria.Banco == string.Empty)
+                    {
+                        registroPago.StatusCode = StatusCodes.Status400BadRequest;
+                        registroPago.Errores.Add("Beneficiario No posee datos Bancarios");
+                        return registroPago;
+                    }
+
                     var personaBeneficiario = ConsultaPersonaCompleta(unBeneficiario.Rut);
-                    if (personaBeneficiario.StatusCode != StatusCodes.Status200OK)
+                    if (personaBeneficiario.StatusCode == StatusCodes.Status200OK && personaBeneficiario.Egn.ToString() == "0")
                     {
                         var creaPersona = CreaPersonaBeneficiario(unBeneficiario);
-                        personaBeneficiario = ConsultaPersonaCompleta(unBeneficiario.Rut);
+                        if (creaPersona.StatusCode == StatusCodes.Status200OK)
+                        {
+                            personaBeneficiario = ConsultaPersonaCompleta(unBeneficiario.Rut);
+                        }
+                        else
+                        {                         
+                            registroPago.StatusCode = StatusCodes.Status400BadRequest;
+                            registroPago.Errores.Add("PROBLEMAS AL CREAR PERSONA BENEFICIARIO (IPC 107)");
+                            return registroPago;
+                        }
                     }
 
                     Beneficiary beneficiary = new Beneficiary();
@@ -877,9 +888,9 @@ namespace CharlesApi.Data.Liquidar
                 //    registroPago = JsonConvert.DeserializeObject<RegistroPagoResult>(response.Content);
                 //}
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return registroPago;
@@ -1115,21 +1126,24 @@ namespace CharlesApi.Data.Liquidar
         private CreaPersonaResult CreaPersonaParticipante(CharlesApi.Models.Request.LiquidarSiniestro.Participante participante)
         {
             //107
-
+            var body = string.Empty;
             CreaPersonaResult creaPersonaResult = new CreaPersonaResult() { StatusCode = StatusCodes.Status400BadRequest };
 
             CreaPersonaRequest creaPersonaRequest = new CreaPersonaRequest();
-            creaPersonaRequest.ManComp = 1;// PERSONA NATURAL 
-            creaPersonaRequest.Egn = participante.Rut;
-
+            CreaPersonaEmpresaRequest creaPersonaEmpresaRequest = new CreaPersonaEmpresaRequest();
+          
             var rutNumerico = Convert.ToInt32(participante.Rut.Remove(participante.Rut.Length - 1));
             if (rutNumerico > 50000000)
             {
-                creaPersonaRequest.ManComp = 2;// PERSONA Juridica 
-                creaPersonaRequest.Name = participante.PrimerNombre;
+                creaPersonaEmpresaRequest.ManComp = 2;// PERSONA Juridica 
+                creaPersonaEmpresaRequest.Name = participante.PrimerNombre;
+                creaPersonaEmpresaRequest.Egn = participante.Rut;
+                body = JsonConvert.SerializeObject(creaPersonaEmpresaRequest);
             }
             else
             {
+                creaPersonaRequest.ManComp = 1;// PERSONA NATURAL 
+                creaPersonaRequest.Egn = participante.Rut;
                 creaPersonaRequest.BirthDate = participante.FechaNacimiento.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'"); ;
                 creaPersonaRequest.Gname = participante.PrimerNombre;
                 creaPersonaRequest.Sname = participante.Apellidos;
@@ -1167,13 +1181,14 @@ namespace CharlesApi.Data.Liquidar
                 //    creaPersonaRequest.Contacts = new List<Models.Request.CreaPersona.Contact>();
                 //    creaPersonaRequest.Contacts.Add(contact);
                 //}
+                body = JsonConvert.SerializeObject(creaPersonaRequest);
             }
 
             var client = new RestClient($"{settings.UrlBaseEsoapApi}api/Persona/v1/persona");
             var request = new RestRequest("", Method.Post);
             request.AddHeader("Content-Type", "application/json");
 
-            var body = JsonConvert.SerializeObject(creaPersonaRequest);
+           
             request.AddStringBody(body, DataFormat.Json);
             var response = client.Execute<CreaPersonaResult>(request);
             creaPersonaResult = response.Data;
@@ -1238,18 +1253,20 @@ namespace CharlesApi.Data.Liquidar
             //CONTACT
             Models.Request.CreaPersona.Contact contact = new Models.Request.CreaPersona.Contact();
             contact.ContactType = "EMAIL";
-            contact.Details = beneficiario.ViaContacto.FormaContacto;
+            contact.Details = beneficiario.ViaContacto.InformacionContacto;
             contact.PrimaryFlag = "N";
             creaPersonaRequest.Contacts = new List<Models.Request.CreaPersona.Contact>();
             creaPersonaRequest.Contacts.Add(contact);
 
             //BANK ACCOUNT
+            var bancoSura = bancoRepository.ObtenerBanco(new Entities.Banco.BancoModel() { CodigoBancoCharles = beneficiario.CuentaBancaria.Banco });
+
             Models.Request.CreaPersona.BankAccount bankAccount = new Models.Request.CreaPersona.BankAccount();
             bankAccount.AccountCurrency = beneficiario.CuentaBancaria.Moneda;
             bankAccount.AccountNum = beneficiario.CuentaBancaria.NumeroCuenta;
             bankAccount.AccountState = 1;
             bankAccount.PrimaryFlag = "Y";
-            bankAccount.BankId = 6250000981;
+            bankAccount.BankId = (long)Convert.ToDouble(bancoSura.CodigoBancoSura);
             creaPersonaRequest.BankAccounts = new List<Models.Request.CreaPersona.BankAccount>();
             creaPersonaRequest.BankAccounts.Add(bankAccount);
 
@@ -1278,7 +1295,7 @@ namespace CharlesApi.Data.Liquidar
             RegistroReclamanteRequest registroReclamanteRequest = new RegistroReclamanteRequest();
             registroReclamanteRequest.ClaimNo = consultaSiniestroResult.ClaimId.ToString();// "20700001714";
             registroReclamanteRequest.Request = new CharlesApi.Models.Request.RegistroReclamante.Request();
-            registroReclamanteRequest.Request.RequestDate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            registroReclamanteRequest.Request.RequestDate = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
             registroReclamanteRequest.Request.ClaimantId = consultaPersonaResult.RowSet[0].ManId;
 
             var tipoReclamante = tipoReclamanteRepository.ObtenerTipoReclamante(new Entities.TipoReclamante.TipoReclamanteModel() { CodigoTipoReclamanteCharles = codigoTipoReclamanteCharles });

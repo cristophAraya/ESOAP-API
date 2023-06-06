@@ -91,10 +91,10 @@ namespace Cl.Sura.ESoapApi.Data.Persona
                     throw new TechnicalExcepction(error.Message);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             return consultaPersonaModel;
         }
