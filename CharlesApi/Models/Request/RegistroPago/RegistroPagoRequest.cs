@@ -28,8 +28,8 @@ namespace CharlesApi.Models.Request.RegistroPago
         [JsonProperty("paymentWay")]
         public string PaymentWay { get; set; }
 
-        [JsonProperty("benefShare")]
-        public int BenefShare { get; set; }        
+        [JsonProperty("benefShare", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public int? BenefShare { get; set; }        
 
         [JsonProperty("calculations")]
         public Calculations Calculations { get; set; }
@@ -42,7 +42,7 @@ namespace CharlesApi.Models.Request.RegistroPago
     {
         [JsonProperty("bankPid")]
 
-        public long BankPid { get; set; }
+        public string BankPid { get; set; }
 
         [JsonProperty("accountNo")]
         public string AccountNo { get; set; }

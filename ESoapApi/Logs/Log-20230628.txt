@@ -1,0 +1,16 @@
+2023-06-28T10:26:51.3830367-04:00  [INF] Now listening on: "https://localhost:7186" (d826f4b8)
+2023-06-28T10:26:51.4023698-04:00  [INF] Now listening on: "http://localhost:5191" (d826f4b8)
+2023-06-28T10:26:51.5319839-04:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2023-06-28T10:26:51.5437506-04:00  [INF] Hosting environment: "Development" (c3307c92)
+2023-06-28T10:26:51.5498208-04:00  [INF] Content root path: "C:\ResposBitBucket\ESOAP-API\ESoapApi" (b5d60022)
+2023-06-28T10:31:58.3262676-04:00 0HMRNSERFBBBT:00000002 [ERR] Error PolizaController.Get    at Cl.Sura.ESoapApi.Data.Poliza.PolizaService.ConsultaPoliza(String numeroPoliza) in C:\ResposBitBucket\ESOAP-API\ESoapApi\Data\Poliza\PolizaService.cs:line 36
+   at Cl.Sura.ESoapApi.Controllers.Poliza.PolizaController.Get(String policyNo) in C:\ResposBitBucket\ESOAP-API\ESoapApi\Controllers\Poliza\PolizaController.cs:line 27 (9d558523)
+2023-06-28T10:32:25.6117953-04:00 0HMRNSERFBBBU:00000002 [ERR] Error PolizaController.Get    at Cl.Sura.ESoapApi.Data.Poliza.PolizaService.ConsultaPoliza(String numeroPoliza) in C:\ResposBitBucket\ESOAP-API\ESoapApi\Data\Poliza\PolizaService.cs:line 36
+   at Cl.Sura.ESoapApi.Controllers.Poliza.PolizaController.Get(String policyNo) in C:\ResposBitBucket\ESOAP-API\ESoapApi\Controllers\Poliza\PolizaController.cs:line 27 (9d558523)
+2023-06-28T12:38:22.4626563-04:00  [INF] Now listening on: "https://localhost:7186" (d826f4b8)
+2023-06-28T12:38:22.4832450-04:00  [INF] Now listening on: "http://localhost:5191" (d826f4b8)
+2023-06-28T12:38:22.5274957-04:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2023-06-28T12:38:22.5321280-04:00  [INF] Hosting environment: "Development" (c3307c92)
+2023-06-28T12:38:22.5353920-04:00  [INF] Content root path: "C:\ResposBitBucket\ESOAP-API\ESoapApi" (b5d60022)
+2023-06-28T12:41:40.3051112-04:00 0HMRNUOBA85GT:00000002 [ERR] Error PolizaController.Get    at Cl.Sura.ESoapApi.Data.Poliza.PolizaService.ConsultaPoliza(String numeroPoliza) in C:\ResposBitBucket\ESOAP-API\ESoapApi\Data\Poliza\PolizaService.cs:line 36
+   at Cl.Sura.ESoapApi.Controllers.Poliza.PolizaController.Get(String policyNo) in C:\ResposBitBucket\ESOAP-API\ESoapApi\Controllers\Poliza\PolizaController.cs:line 27 (9d558523)

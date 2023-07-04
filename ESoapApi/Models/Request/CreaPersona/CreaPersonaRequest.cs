@@ -45,7 +45,7 @@ namespace Cl.Sura.ESoapApi.Models.Request.CreaPersona
         [JsonProperty("addressType")]
         public string AddressType { get; set; }
 
-        [JsonProperty("address")]
+        [JsonProperty(PropertyName = "address")]
         public string AddressAddress { get; set; }
 
         [JsonProperty("blockNumber")]

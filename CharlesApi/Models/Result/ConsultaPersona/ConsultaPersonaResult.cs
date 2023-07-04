@@ -33,10 +33,11 @@ namespace CharlesApi.Models.Result.ConsultaPersona
         public long ManComp { get; set; }
 
         [JsonProperty("birthDate")]
-        public DateTimeOffset BirthDate { get; set; }
+        public DateTimeOffset? BirthDate { get; set; }
 
         [JsonProperty("egn")]
-        public long Egn { get; set; }
+
+        public string Egn { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -111,3 +112,4 @@ namespace CharlesApi.Models.Result.ConsultaPersona
         public object Attr5 { get; set; }
     }
 }
+

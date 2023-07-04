@@ -42,7 +42,7 @@ namespace CharlesApi.Models.Request.CreaPersona
         [JsonProperty("addressType")]
         public string AddressType { get; set; }
 
-        [JsonProperty("address")]
+        [JsonProperty("addressAddress")]
         public string AddressAddress { get; set; }
 
         [JsonProperty("blockNumber")]

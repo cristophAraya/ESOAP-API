@@ -36,11 +36,11 @@ namespace Cl.Sura.ESoapApi.Models.Result.ConsultaPersona
         public long ManComp { get; set; }
 
         [JsonProperty("birthDate")]
-        public DateTimeOffset BirthDate { get; set; }
+        public DateTimeOffset? BirthDate { get; set; }
 
         [JsonProperty("egn")]
-        [JsonConverter(typeof(ParseStringConverter))]
-        public long Egn { get; set; }
+
+        public string Egn { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -115,3 +115,4 @@ namespace Cl.Sura.ESoapApi.Models.Result.ConsultaPersona
         public object Attr5 { get; set; }
     }
 }
+

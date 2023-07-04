@@ -9,7 +9,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPersonaCompleta
 
         [JsonProperty("egn")]
 
-        public long Egn { get; set; }
+        public string Egn { get; set; }
 
         [JsonProperty("manId")]
         public long ManId { get; set; }
@@ -138,7 +138,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPersonaCompleta
 
         [JsonProperty("stateRegion")]
 
-        public long StateRegion { get; set; }
+        public long? StateRegion { get; set; }
 
         [JsonProperty("streetId")]
         public object StreetId { get; set; }
@@ -173,7 +173,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPersonaCompleta
     {
         [JsonProperty("egn")]
 
-        public long Egn { get; set; }
+        public string Egn { get; set; }
 
         [JsonProperty("manComp")]
         public long ManComp { get; set; }

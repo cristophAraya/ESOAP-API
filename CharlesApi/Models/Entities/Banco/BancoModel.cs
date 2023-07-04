@@ -32,6 +32,7 @@
 			public string CodigoBancoSura { get; set; }
 			public string NombreBancoCharles { get; set; }
 			public string CodigoBancoCharles { get; set; }
+        public string BankId { get; set; }
 			/// <summary>
 			/// Constructor de la Clase BancoTo
 			/// </summary>

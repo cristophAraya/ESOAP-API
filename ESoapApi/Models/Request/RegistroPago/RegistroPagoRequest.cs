@@ -24,13 +24,13 @@ namespace Cl.Sura.ESoapApi.Models.Request.RegistroPago
     {
         [JsonProperty("pid")]
 
-        public long Pid { get; set; }
+        public string Pid { get; set; }
 
         [JsonProperty("paymentWay")]
-        public long PaymentWay { get; set; }
+        public string PaymentWay { get; set; }
 
-        [JsonProperty("benefShare")]
-        public int BenefShare { get; set; }
+        [JsonProperty("benefShare", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public int? BenefShare { get; set; }
 
         [JsonProperty("calculations")]
         public Calculations Calculations { get; set; }
@@ -43,7 +43,7 @@ namespace Cl.Sura.ESoapApi.Models.Request.RegistroPago
     {
         [JsonProperty("bankPid")]
 
-        public long BankPid { get; set; }
+        public string BankPid { get; set; }
 
         [JsonProperty("accountNo")]
         public string AccountNo { get; set; }

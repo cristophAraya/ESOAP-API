@@ -90,7 +90,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.CreaPersona
 
         [JsonProperty("cityCode")]
 
-        public long CityCode { get; set; }
+        public long? CityCode { get; set; }
 
         [JsonProperty("country")]
         public string Country { get; set; }

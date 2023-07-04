@@ -101,9 +101,11 @@ namespace CharlesApi.Controllers.LiquidarSiniestro
                 logger.LogError($"Error LiquidarSiniestroController.Get {e.StackTrace}");
                 liquidarSiniestroResult.Errores.Add(e.Message);
                 liquidarSiniestroResult.StatusCode = StatusCodes.Status400BadRequest;
+                logger.LogInformation($"liquidarSiniestro => {DateTime.Now},LiquidarSiniestroResult => {JsonConvert.SerializeObject(liquidarSiniestroResult)}");
                 return StatusCode(StatusCodes.Status400BadRequest, liquidarSiniestroResult);
             }
 
+            logger.LogInformation($"liquidarSiniestro => {DateTime.Now},LiquidarSiniestroResult => {JsonConvert.SerializeObject(liquidarSiniestroResult)}");
             return StatusCode(liquidarSiniestroResult.StatusCode, liquidarSiniestroResult);
         }
 

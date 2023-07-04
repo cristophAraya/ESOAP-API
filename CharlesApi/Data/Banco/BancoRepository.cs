@@ -50,7 +50,7 @@ namespace CharlesApi.Repository.Banco
 			BancoModel result = null;
 			using (IDbConnection db = new SqlConnection(GetDatabase()))
             {
-				string query = @"Select RutBancoSura, NombreBancoSura, CodigoBancoSura, NombreBancoCharles, CodigoBancoCharles  FROM Dbo.Banco WHERE CodigoBancoCharles= @CodigoBancoCharles ";
+				string query = @"Select RutBancoSura, NombreBancoSura, CodigoBancoSura, NombreBancoCharles, CodigoBancoCharles,BankId  FROM Dbo.Banco WHERE CodigoBancoCharles= @CodigoBancoCharles ";
 				result = db.QueryFirstOrDefault<BancoModel>(query, bancoModel);
 			}
 			return result;                        

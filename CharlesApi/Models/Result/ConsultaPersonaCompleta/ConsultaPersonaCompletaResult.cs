@@ -4,13 +4,15 @@ namespace CharlesApi.Models.Result.ConsultaPersonaCompleta
 {
     public class ConsultaPersonaCompletaResult
     {
+        [JsonProperty("errores")]
+        public List<string> Errores { get; set; } = new List<string>();
         public int StatusCode { get; set; }
         [JsonProperty("registrationDate")]
         public DateTimeOffset RegistrationDate { get; set; }
 
         [JsonProperty("egn")]
 
-        public long Egn { get; set; }
+        public string Egn { get; set; }
 
         [JsonProperty("manId")]
         public long ManId { get; set; }
@@ -139,7 +141,7 @@ namespace CharlesApi.Models.Result.ConsultaPersonaCompleta
 
         [JsonProperty("stateRegion")]
 
-        public long StateRegion { get; set; }
+        public long? StateRegion { get; set; }
 
         [JsonProperty("streetId")]
         public object StreetId { get; set; }
@@ -174,7 +176,7 @@ namespace CharlesApi.Models.Result.ConsultaPersonaCompleta
     {
         [JsonProperty("egn")]
 
-        public long Egn { get; set; }
+        public string Egn { get; set; }
 
         [JsonProperty("manComp")]
         public long ManComp { get; set; }

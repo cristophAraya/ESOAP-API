@@ -34,6 +34,7 @@ using CharlesApi.Models.Request.Confirmar;
 using CharlesApi.Models.Request.ConfirmarCalculo;
 using CharlesApi.Models.Request.ConfirmarPago;
 using CharlesApi.Models.Request.CreaPersona;
+using CharlesApi.Models.Request.CreaPersonaEmpresaBeneficiario;
 using CharlesApi.Models.Request.LiquidarSiniestro;
 using CharlesApi.Models.Request.RegistroCalculo;
 using CharlesApi.Models.Request.RegistroEvaluacion;
@@ -823,6 +824,12 @@ namespace CharlesApi.Data.Liquidar
                         registroPago.Errores.Add("Beneficiario No posee datos Bancarios");
                         return registroPago;
                     }
+                    if (unBeneficiario.ViaContacto == null || unBeneficiario.ViaContacto.InformacionContacto == string.Empty)
+                    {
+                        registroPago.StatusCode = StatusCodes.Status400BadRequest;
+                        registroPago.Errores.Add("Beneficiario No posee datos Contacto");
+                        return registroPago;
+                    }
 
                     var personaBeneficiario = ConsultaPersonaCompleta(unBeneficiario.Rut);
                     if (personaBeneficiario.StatusCode == StatusCodes.Status200OK && personaBeneficiario.Egn.ToString() == "0")
@@ -844,7 +851,7 @@ namespace CharlesApi.Data.Liquidar
                     beneficiary.Pid = personaBeneficiario.Egn.ToString();
                     beneficiary.PaymentWay = "4"; // ES FIJO
 
-                    if (unBeneficiario.Porcentaje > 0)
+                    if (unBeneficiario.Porcentaje > 0 && unBeneficiario.Porcentaje <100)
                     {
                         beneficiary.BenefShare = unBeneficiario.Porcentaje;
                     }
@@ -939,7 +946,7 @@ namespace CharlesApi.Data.Liquidar
                 //    "bankName":"Banco del Estado"
                 //}
 
-                bankAccount.BankPid = beneficiario.BankAccounts[0].PBanks.BankPid.Egn;
+              //  bankAccount.BankPid = beneficiario.BankAccounts[0].PBanks.BankPid.Egn;
                 bankAccount.AccountNo = beneficiario.BankAccounts[0].AccountNum;
                 bankAccount.BankAccId = beneficiario.BankAccounts[0].BankAccId;
                 bankAccount.BankName = beneficiario.BankAccounts[0].PBanks.SwiftCode;
@@ -1050,9 +1057,7 @@ namespace CharlesApi.Data.Liquidar
             var body = string.Empty;
 
             CreaPersonaRequest creaPersonaRequest = new CreaPersonaRequest();
-            CreaPersonaEmpresaRequest creaPersonaEmpresaRequest = new CreaPersonaEmpresaRequest();
-            creaPersonaRequest.ManComp = 1;// PERSONA NATURAL 
-            creaPersonaRequest.Egn = reclamante.Rut;
+            CreaPersonaEmpresaRequest creaPersonaEmpresaRequest = new CreaPersonaEmpresaRequest();            
 
             var rutNumerico = Convert.ToInt32(reclamante.Rut.Remove(reclamante.Rut.Length - 1));
             if (rutNumerico > 50000000)
@@ -1065,6 +1070,8 @@ namespace CharlesApi.Data.Liquidar
             }
             else
             {
+                creaPersonaRequest.ManComp = 1;// PERSONA NATURAL 
+                creaPersonaRequest.Egn = reclamante.Rut;
                 creaPersonaRequest.BirthDate = reclamante.FechaNacimiento.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'"); ;              
                 creaPersonaRequest.Gname = reclamante.PrimerNombre;
                 creaPersonaRequest.Sname = reclamante.Apellidos;
@@ -1206,75 +1213,104 @@ namespace CharlesApi.Data.Liquidar
             CreaPersonaResult creaPersonaResult = new CreaPersonaResult() { StatusCode = StatusCodes.Status400BadRequest };
 
             CreaPersonaRequest creaPersonaRequest = new CreaPersonaRequest();
-            creaPersonaRequest.ManComp = 1;
-            creaPersonaRequest.Egn = beneficiario.Rut;
+            string body = string.Empty;
+
+
 
             var rutNumerico = Convert.ToInt32(beneficiario.Rut.Remove(beneficiario.Rut.Length - 1));
             if (rutNumerico > 50000000)
             {
-                creaPersonaRequest.ManComp = 2;// PERSONA Juridica 
-                creaPersonaRequest.Name = beneficiario.PrimerNombre;
+                CreaPersonaEmpresaBeneficiarioRequest creaPersonaEmpresaBeneficiarioRequest = new CreaPersonaEmpresaBeneficiarioRequest();
+                creaPersonaEmpresaBeneficiarioRequest.ManComp = 2;
+                creaPersonaEmpresaBeneficiarioRequest.Name = beneficiario.PrimerNombre;
+                
+                //CONTACTS
+                creaPersonaEmpresaBeneficiarioRequest.Contacts = new List<Models.Request.CreaPersonaEmpresaBeneficiario.Contact>();
+                Models.Request.CreaPersonaEmpresaBeneficiario.Contact contacto = new Models.Request.CreaPersonaEmpresaBeneficiario.Contact();
+                contacto.ContactType = beneficiario.ViaContacto.TipoContacto;
+                contacto.Details = beneficiario.ViaContacto.InformacionContacto;
+                contacto.PrimaryFlag = "Y";
+                creaPersonaEmpresaBeneficiarioRequest.Contacts.Add(contacto);
+
+                //BANK ACCOUNT
+                var bancoSura = bancoRepository.ObtenerBanco(new Entities.Banco.BancoModel() { CodigoBancoCharles = beneficiario.CuentaBancaria.Banco });
+                creaPersonaEmpresaBeneficiarioRequest.BankAccounts = new List<Models.Request.CreaPersonaEmpresaBeneficiario.BankAccount>();
+                Models.Request.CreaPersonaEmpresaBeneficiario.BankAccount bankAccount = new Models.Request.CreaPersonaEmpresaBeneficiario.BankAccount();
+                bankAccount.AccountCurrency = beneficiario.CuentaBancaria.Moneda;
+                bankAccount.AccountNum = beneficiario.CuentaBancaria.NumeroCuenta;
+                bankAccount.AccountState = 1;
+                bankAccount.BankId = (long)Convert.ToDouble(bancoSura.BankId);
+                bankAccount.PrimaryFlag = "Y";
+                creaPersonaEmpresaBeneficiarioRequest.BankAccounts.Add(bankAccount);
+
+                body = JsonConvert.SerializeObject(creaPersonaEmpresaBeneficiarioRequest);
+
             }
             else
             {
+                creaPersonaRequest.ManComp = 1;
+                creaPersonaRequest.Egn = beneficiario.Rut;
                 creaPersonaRequest.BirthDate = beneficiario.FechaNacimiento.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'"); ;
                 creaPersonaRequest.Egn = beneficiario.Rut;
                 creaPersonaRequest.Gname = beneficiario.PrimerNombre;
                 creaPersonaRequest.Sname = beneficiario.Apellidos;
                 creaPersonaRequest.Fname = $"{beneficiario.PrimerNombre} {beneficiario.SegundoNombre} {beneficiario.Apellidos}";
                 creaPersonaRequest.Sex = 3;// reclamante.Genero; mapear
+
+
+                //ADDRESSES
+                creaPersonaRequest.Addresses = new List<Models.Request.CreaPersona.Address>();
+                Models.Request.CreaPersona.Address address = new Models.Request.CreaPersona.Address();
+                address.AddressType = "H";
+                address.AddressAddress = string.IsNullOrEmpty(beneficiario.Direccion.Direcion) ? "Sin Informacion" : beneficiario.Direccion.Direcion;
+                address.BlockNumber = beneficiario.Direccion.CasaDepto;
+                address.City = beneficiario.Direccion.Ciudad;
+                address.CityCode = "";//MATCH
+                address.Country = beneficiario.Direccion.Pais;
+                address.CountryCode = "";//match
+                address.CountryState = "";
+                address.EntranceNumber = "";//????
+                address.InvoiceYn = "N";
+                address.MailYn = "N";
+                address.PostCode = "76000";
+                address.PrimaryFlag = "Y";
+                address.QuarterId = "253";
+                address.RegionName = beneficiario.Direccion.Region;
+                address.StateName = "";
+                address.StateRegion = "";
+                address.StreetName = beneficiario.Direccion.Calle;
+                address.StreetNumber = beneficiario.Direccion.Numeracion;
+                creaPersonaRequest.Addresses.Add(address);
+
+                //CONTACT
+                Models.Request.CreaPersona.Contact contact = new Models.Request.CreaPersona.Contact();
+                contact.ContactType = "EMAIL";
+                contact.Details = beneficiario.ViaContacto.InformacionContacto;
+                contact.PrimaryFlag = "N";
+                creaPersonaRequest.Contacts = new List<Models.Request.CreaPersona.Contact>();
+                creaPersonaRequest.Contacts.Add(contact);
+
+                //BANK ACCOUNT
+                var bancoSura = bancoRepository.ObtenerBanco(new Entities.Banco.BancoModel() { CodigoBancoCharles = beneficiario.CuentaBancaria.Banco });
+
+                Models.Request.CreaPersona.BankAccount bankAccount = new Models.Request.CreaPersona.BankAccount();
+                bankAccount.AccountCurrency = beneficiario.CuentaBancaria.Moneda;
+                bankAccount.AccountNum = beneficiario.CuentaBancaria.NumeroCuenta;
+                bankAccount.AccountState = 1;
+                bankAccount.PrimaryFlag = "Y";
+                bankAccount.BankId = (long)Convert.ToDouble(bancoSura.BankId);
+                creaPersonaRequest.BankAccounts = new List<Models.Request.CreaPersona.BankAccount>();
+                creaPersonaRequest.BankAccounts.Add(bankAccount);
+                
+
+                body = JsonConvert.SerializeObject(creaPersonaRequest);
             }
-
-
-            //ADDRESSES
-            creaPersonaRequest.Addresses = new List<Models.Request.CreaPersona.Address>();
-            Models.Request.CreaPersona.Address address = new Models.Request.CreaPersona.Address();
-            address.AddressType = "H";
-            address.AddressAddress = beneficiario.Direccion.Calle;
-            address.BlockNumber = beneficiario.Direccion.CasaDepto;
-            address.City = beneficiario.Direccion.Ciudad;
-            address.CityCode = "";//MATCH
-            address.Country = beneficiario.Direccion.Pais;
-            address.CountryCode = "";//match
-            address.CountryState = "";
-            address.EntranceNumber = "";//????
-            address.InvoiceYn = "N";
-            address.MailYn = "N";
-            address.PostCode = "76000";
-            address.PrimaryFlag = "Y";
-            address.QuarterId = "253";
-            address.RegionName = beneficiario.Direccion.Region;
-            address.StateName = "";
-            address.StateRegion = "";
-            address.StreetName = beneficiario.Direccion.Calle;
-            address.StreetNumber = beneficiario.Direccion.Numeracion;
-            creaPersonaRequest.Addresses.Add(address);
-
-            //CONTACT
-            Models.Request.CreaPersona.Contact contact = new Models.Request.CreaPersona.Contact();
-            contact.ContactType = "EMAIL";
-            contact.Details = beneficiario.ViaContacto.InformacionContacto;
-            contact.PrimaryFlag = "N";
-            creaPersonaRequest.Contacts = new List<Models.Request.CreaPersona.Contact>();
-            creaPersonaRequest.Contacts.Add(contact);
-
-            //BANK ACCOUNT
-            var bancoSura = bancoRepository.ObtenerBanco(new Entities.Banco.BancoModel() { CodigoBancoCharles = beneficiario.CuentaBancaria.Banco });
-
-            Models.Request.CreaPersona.BankAccount bankAccount = new Models.Request.CreaPersona.BankAccount();
-            bankAccount.AccountCurrency = beneficiario.CuentaBancaria.Moneda;
-            bankAccount.AccountNum = beneficiario.CuentaBancaria.NumeroCuenta;
-            bankAccount.AccountState = 1;
-            bankAccount.PrimaryFlag = "Y";
-            bankAccount.BankId = (long)Convert.ToDouble(bancoSura.CodigoBancoSura);
-            creaPersonaRequest.BankAccounts = new List<Models.Request.CreaPersona.BankAccount>();
-            creaPersonaRequest.BankAccounts.Add(bankAccount);
 
             var client = new RestClient($"{settings.UrlBaseEsoapApi}api/Persona/v1/persona");
             var request = new RestRequest("", Method.Post);
             request.AddHeader("Content-Type", "application/json");
 
-            var body = JsonConvert.SerializeObject(creaPersonaRequest);
+           
             request.AddStringBody(body, DataFormat.Json);
             var response = client.Execute<CreaPersonaResult>(request);
             creaPersonaResult = response.Data;
@@ -1295,7 +1331,7 @@ namespace CharlesApi.Data.Liquidar
             RegistroReclamanteRequest registroReclamanteRequest = new RegistroReclamanteRequest();
             registroReclamanteRequest.ClaimNo = consultaSiniestroResult.ClaimId.ToString();// "20700001714";
             registroReclamanteRequest.Request = new CharlesApi.Models.Request.RegistroReclamante.Request();
-            registroReclamanteRequest.Request.RequestDate = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            registroReclamanteRequest.Request.RequestDate = "2023-02-13T00:29:04Z";// DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
             registroReclamanteRequest.Request.ClaimantId = consultaPersonaResult.RowSet[0].ManId;
 
             var tipoReclamante = tipoReclamanteRepository.ObtenerTipoReclamante(new Entities.TipoReclamante.TipoReclamanteModel() { CodigoTipoReclamanteCharles = codigoTipoReclamanteCharles });
