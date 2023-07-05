@@ -50,7 +50,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public DateTimeOffset ConclusionDate { get; set; }
 
         [JsonProperty("dateCovered")]
-        public DateTimeOffset DateCovered { get; set; }
+        public string DateCovered { get; set; }
 
         [JsonProperty("tariffRule")]
         public string TariffRule { get; set; }
@@ -129,10 +129,10 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
     public partial class PAgents
     {
         [JsonProperty("accountId")]
-        public object AccountId { get; set; }
+        public string AccountId { get; set; }
 
         [JsonProperty("accountNumber")]
-        public object AccountNumber { get; set; }
+        public string AccountNumber { get; set; }
 
         [JsonProperty("agentId")]
         public long AgentId { get; set; }
@@ -148,7 +148,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long AgentType { get; set; }
 
         [JsonProperty("contractMonths")]
-        public object ContractMonths { get; set; }
+        public string ContractMonths { get; set; }
 
         [JsonProperty("contractType")]
         public string ContractType { get; set; }
@@ -158,13 +158,13 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long DefaultAgent { get; set; }
 
         [JsonProperty("fireDate")]
-        public object FireDate { get; set; }
+        public string FireDate { get; set; }
 
         [JsonProperty("hireDate")]
         public DateTimeOffset HireDate { get; set; }
 
         [JsonProperty("leavingReason")]
-        public object LeavingReason { get; set; }
+        public string LeavingReason { get; set; }
 
         [JsonProperty("mainAgent")]
         public long MainAgent { get; set; }
@@ -173,16 +173,16 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long ManId { get; set; }
 
         [JsonProperty("notes")]
-        public object Notes { get; set; }
+        public string Notes { get; set; }
 
         [JsonProperty("officeId")]
         public long OfficeId { get; set; }
 
         [JsonProperty("oldAgentNo")]
-        public object OldAgentNo { get; set; }
+        public string OldAgentNo { get; set; }
 
         [JsonProperty("prevJobConfirmDate")]
-        public object PrevJobConfirmDate { get; set; }
+        public string PrevJobConfirmDate { get; set; }
 
         [JsonProperty("qualifLevel")]
         
@@ -195,10 +195,10 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
     public partial class PPeopleComplex
     {
         [JsonProperty("errorMessage")]
-        public object ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; }
 
         [JsonProperty("operation")]
-        public object Operation { get; set; }
+        public string Operation { get; set; }
 
         [JsonProperty("manId")]
         public long ManId { get; set; }
@@ -223,16 +223,16 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string Sname { get; set; }
 
         [JsonProperty("fname")]
-        public object Fname { get; set; }
+        public string Fname { get; set; }
 
         [JsonProperty("sex")]
         public long Sex { get; set; }
 
         [JsonProperty("namePrefix")]
-        public object NamePrefix { get; set; }
+        public string NamePrefix { get; set; }
 
         [JsonProperty("nameSuffix")]
-        public object NameSuffix { get; set; }
+        public string NameSuffix { get; set; }
 
         [JsonProperty("nationality")]
         public string Nationality { get; set; }
@@ -244,46 +244,46 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string Language { get; set; }
 
         [JsonProperty("classCode")]
-        public object ClassCode { get; set; }
+        public string ClassCode { get; set; }
 
         [JsonProperty("classSubCode")]
-        public object ClassSubCode { get; set; }
+        public string ClassSubCode { get; set; }
 
         [JsonProperty("compType")]
-        public object CompType { get; set; }
+        public string CompType { get; set; }
 
         [JsonProperty("dataSource")]
-        public object DataSource { get; set; }
+        public string DataSource { get; set; }
 
         [JsonProperty("fiscalPeriod")]
-        public object FiscalPeriod { get; set; }
+        public string FiscalPeriod { get; set; }
 
         [JsonProperty("industryCode")]
-        public object IndustryCode { get; set; }
+        public string IndustryCode { get; set; }
 
         [JsonProperty("subIndustryCode")]
-        public object SubIndustryCode { get; set; }
+        public string SubIndustryCode { get; set; }
 
         [JsonProperty("notes")]
-        public object Notes { get; set; }
+        public string Notes { get; set; }
 
         [JsonProperty("registrationDate")]
         public DateTimeOffset RegistrationDate { get; set; }
 
         [JsonProperty("attr1")]
-        public object Attr1 { get; set; }
+        public string Attr1 { get; set; }
 
         [JsonProperty("attr2")]
-        public object Attr2 { get; set; }
+        public string Attr2 { get; set; }
 
         [JsonProperty("attr3")]
-        public object Attr3 { get; set; }
+        public string Attr3 { get; set; }
 
         [JsonProperty("attr4")]
-        public object Attr4 { get; set; }
+        public string Attr4 { get; set; }
 
         [JsonProperty("attr5")]
-        public object Attr5 { get; set; }
+        public string Attr5 { get; set; }
 
         [JsonProperty("documents")]
         public Document[] Documents { get; set; }
@@ -298,16 +298,16 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public Question[] Questions { get; set; }
 
         [JsonProperty("peopleGroups")]
-        public object[] PeopleGroups { get; set; }
+        public string[] PeopleGroups { get; set; }
 
         [JsonProperty("contactPersons")]
-        public object[] ContactPersons { get; set; }
+        public string[] ContactPersons { get; set; }
 
         [JsonProperty("relations1")]
-        public object[] Relations1 { get; set; }
+        public string[] Relations1 { get; set; }
 
         [JsonProperty("relations2")]
-        public object[] Relations2 { get; set; }
+        public string[] Relations2 { get; set; }
 
         [JsonProperty("bankAccounts")]
         public BankAccount[] BankAccounts { get; set; }
@@ -328,10 +328,10 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string AddressAddress { get; set; }
 
         [JsonProperty("apartmentNumber")]
-        public object ApartmentNumber { get; set; }
+        public string ApartmentNumber { get; set; }
 
         [JsonProperty("blockNumber")]
-        public object BlockNumber { get; set; }
+        public string BlockNumber { get; set; }
 
         [JsonProperty("city")]
         public string City { get; set; }
@@ -350,7 +350,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string CountryState { get; set; }
 
         [JsonProperty("entranceNumber")]
-        public object EntranceNumber { get; set; }
+        public string EntranceNumber { get; set; }
 
         [JsonProperty("floorNumber")]     
         public string FloorNumber { get; set; }
@@ -362,7 +362,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string MailYn { get; set; }
 
         [JsonProperty("note")]
-        public object Note { get; set; }
+        public string Note { get; set; }
 
         [JsonProperty("postCode")]
         public string PostCode { get; set; }
@@ -388,7 +388,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string StateRegion { get; set; }
 
         [JsonProperty("streetId")]
-        public object StreetId { get; set; }
+        public string StreetId { get; set; }
 
         [JsonProperty("streetName")]
         public string StreetName { get; set; }
@@ -398,19 +398,19 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string StreetNumber { get; set; }
 
         [JsonProperty("territoryClassification")]
-        public object TerritoryClassification { get; set; }
+        public string TerritoryClassification { get; set; }
 
         [JsonProperty("usageDateFrom")]
-        public object UsageDateFrom { get; set; }
+        public string UsageDateFrom { get; set; }
 
         [JsonProperty("usageDateTo")]
-        public object UsageDateTo { get; set; }
+        public string UsageDateTo { get; set; }
 
         [JsonProperty("validFrom")]
-        public object ValidFrom { get; set; }
+        public string ValidFrom { get; set; }
 
         [JsonProperty("validTo")]
-        public object ValidTo { get; set; }
+        public string ValidTo { get; set; }
 
         [JsonProperty("personPid")]
         public Pid PersonPid { get; set; }
@@ -449,10 +449,10 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string PrimaryFlag { get; set; }
 
         [JsonProperty("validFrom")]
-        public object ValidFrom { get; set; }
+        public string ValidFrom { get; set; }
 
         [JsonProperty("validTo")]
-        public object ValidTo { get; set; }
+        public string ValidTo { get; set; }
 
         [JsonProperty("personPid")]
         public Pid PersonPid { get; set; }
@@ -471,13 +471,13 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long BankId { get; set; }
 
         [JsonProperty("mainBankId")]
-        public object MainBankId { get; set; }
+        public string MainBankId { get; set; }
 
         [JsonProperty("manId")]
         public long ManId { get; set; }
 
         [JsonProperty("swiftCode")]
-        public object SwiftCode { get; set; }
+        public string SwiftCode { get; set; }
 
         [JsonProperty("bankPid")]
         public Pid BankPid { get; set; }
@@ -495,22 +495,22 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string Details { get; set; }
 
         [JsonProperty("language")]
-        public object Language { get; set; }
+        public string Language { get; set; }
 
         [JsonProperty("manId")]
         public long ManId { get; set; }
 
         [JsonProperty("note")]
-        public object Note { get; set; }
+        public string Note { get; set; }
 
         [JsonProperty("primaryFlag")]
         public string PrimaryFlag { get; set; }
 
         [JsonProperty("validFrom")]
-        public object ValidFrom { get; set; }
+        public string ValidFrom { get; set; }
 
         [JsonProperty("validTo")]
-        public object ValidTo { get; set; }
+        public string ValidTo { get; set; }
 
         [JsonProperty("personPid")]
         public Pid PersonPid { get; set; }
@@ -519,10 +519,10 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
     public partial class Document
     {
         [JsonProperty("annexId")]
-        public object AnnexId { get; set; }
+        public string AnnexId { get; set; }
 
         [JsonProperty("certifyEvent")]
-        public object CertifyEvent { get; set; }
+        public string CertifyEvent { get; set; }
 
         [JsonProperty("changeDate")]
         public DateTimeOffset ChangeDate { get; set; }
@@ -531,73 +531,73 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string ChangedBy { get; set; }
 
         [JsonProperty("claimId")]
-        public object ClaimId { get; set; }
+        public string ClaimId { get; set; }
 
         [JsonProperty("claimObjSeq")]
-        public object ClaimObjSeq { get; set; }
+        public string ClaimObjSeq { get; set; }
 
         [JsonProperty("docDate")]
-        public object DocDate { get; set; }
+        public string DocDate { get; set; }
 
         [JsonProperty("docDays")]
-        public object DocDays { get; set; }
+        public string DocDays { get; set; }
 
         [JsonProperty("docDescription")]
-        public object DocDescription { get; set; }
+        public string DocDescription { get; set; }
 
         [JsonProperty("docHolderAddr")]
-        public object DocHolderAddr { get; set; }
+        public string DocHolderAddr { get; set; }
 
         [JsonProperty("docHolderName")]
-        public object DocHolderName { get; set; }
+        public string DocHolderName { get; set; }
 
         [JsonProperty("docId")]
         public string DocId { get; set; }
 
         [JsonProperty("docName")]
-        public object DocName { get; set; }
+        public string DocName { get; set; }
 
         [JsonProperty("docNum")]
-        public object DocNum { get; set; }
+        public string DocNum { get; set; }
 
         [JsonProperty("docSeq")]
         public double DocSeq { get; set; }
 
         [JsonProperty("docSerial")]
-        public object DocSerial { get; set; }
+        public string DocSerial { get; set; }
 
         [JsonProperty("docState")]
         public long DocState { get; set; }
 
         [JsonProperty("docValidTo")]
-        public object DocValidTo { get; set; }
+        public string DocValidTo { get; set; }
 
         [JsonProperty("documentRef")]
-        public object DocumentRef { get; set; }
+        public string DocumentRef { get; set; }
 
         [JsonProperty("grcId")]
-        public object GrcId { get; set; }
+        public string GrcId { get; set; }
 
         [JsonProperty("insuredId")]
-        public object InsuredId { get; set; }
+        public string InsuredId { get; set; }
 
         [JsonProperty("manId")]
         public long ManId { get; set; }
 
         [JsonProperty("notes")]
-        public object Notes { get; set; }
+        public string Notes { get; set; }
 
-        [JsonProperty("objectId")]
-        public object ObjectId { get; set; }
+        [JsonProperty("stringId")]
+        public string stringId { get; set; }
 
         [JsonProperty("pholderId")]
-        public object PholderId { get; set; }
+        public string PholderId { get; set; }
 
         [JsonProperty("policyId")]
-        public object PolicyId { get; set; }
+        public string PolicyId { get; set; }
 
         [JsonProperty("providerId")]
-        public object ProviderId { get; set; }
+        public string ProviderId { get; set; }
 
         [JsonProperty("receiveDate")]
         public DateTimeOffset ReceiveDate { get; set; }
@@ -606,22 +606,22 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public DateTimeOffset RegistrationDate { get; set; }
 
         [JsonProperty("requestId")]
-        public object RequestId { get; set; }
+        public string RequestId { get; set; }
 
         [JsonProperty("requiredFrom")]
-        public object RequiredFrom { get; set; }
+        public string RequiredFrom { get; set; }
 
         [JsonProperty("requiredManId")]
-        public object RequiredManId { get; set; }
+        public string RequiredManId { get; set; }
 
         [JsonProperty("username")]
         public string Username { get; set; }
 
         [JsonProperty("attributes")]
-        public object[] Attributes { get; set; }
+        public string[] Attributes { get; set; }
 
         [JsonProperty("cfgDocName")]
-        public object CfgDocName { get; set; }
+        public string CfgDocName { get; set; }
 
         [JsonProperty("fileName")]
         public string FileName { get; set; }
@@ -630,7 +630,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
     public partial class Question
     {
         [JsonProperty("annexId")]
-        public object AnnexId { get; set; }
+        public string AnnexId { get; set; }
 
         [JsonProperty("changedBy")]
         public string ChangedBy { get; set; }
@@ -639,31 +639,31 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public DateTimeOffset ChangeDate { get; set; }
 
         [JsonProperty("claimId")]
-        public object ClaimId { get; set; }
+        public string ClaimId { get; set; }
 
         [JsonProperty("claimObjSeq")]
-        public object ClaimObjSeq { get; set; }
+        public string ClaimObjSeq { get; set; }
 
         [JsonProperty("grcId")]
-        public object GrcId { get; set; }
+        public string GrcId { get; set; }
 
         [JsonProperty("id")]
         public long Id { get; set; }
 
         [JsonProperty("insuredId")]
-        public object InsuredId { get; set; }
+        public string InsuredId { get; set; }
 
         [JsonProperty("manId")]
         public long ManId { get; set; }
 
-        [JsonProperty("objectId")]
-        public object ObjectId { get; set; }
+        [JsonProperty("stringId")]
+        public string stringId { get; set; }
 
         [JsonProperty("pholderId")]
-        public object PholderId { get; set; }
+        public string PholderId { get; set; }
 
         [JsonProperty("policyId")]
-        public object PolicyId { get; set; }
+        public string PolicyId { get; set; }
 
         [JsonProperty("questAnswer")]
         
@@ -676,13 +676,13 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long QuestOrder { get; set; }
 
         [JsonProperty("questWeight")]
-        public object QuestWeight { get; set; }
+        public string QuestWeight { get; set; }
 
         [JsonProperty("registrationDate")]
         public DateTimeOffset RegistrationDate { get; set; }
 
         [JsonProperty("requestId")]
-        public object RequestId { get; set; }
+        public string RequestId { get; set; }
 
         [JsonProperty("username")]
         public string Username { get; set; }
@@ -691,40 +691,40 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
     public partial class PClients
     {
         [JsonProperty("acceptMarketInfo")]
-        public object AcceptMarketInfo { get; set; }
+        public string AcceptMarketInfo { get; set; }
 
         [JsonProperty("accountId")]
-        public object AccountId { get; set; }
+        public string AccountId { get; set; }
 
         [JsonProperty("clientId")]
         public long ClientId { get; set; }
 
         [JsonProperty("corporateIcStatus")]
-        public object CorporateIcStatus { get; set; }
+        public string CorporateIcStatus { get; set; }
 
         [JsonProperty("customerType")]
-        public object CustomerType { get; set; }
+        public string CustomerType { get; set; }
 
         [JsonProperty("employeeStatus")]
-        public object EmployeeStatus { get; set; }
+        public string EmployeeStatus { get; set; }
 
         [JsonProperty("icStatus")]
-        public object IcStatus { get; set; }
+        public string IcStatus { get; set; }
 
         [JsonProperty("manId")]
         public long ManId { get; set; }
 
         [JsonProperty("officialStatus")]
-        public object OfficialStatus { get; set; }
+        public string OfficialStatus { get; set; }
 
         [JsonProperty("profitability")]
-        public object Profitability { get; set; }
+        public string Profitability { get; set; }
 
         [JsonProperty("riskRating")]
-        public object RiskRating { get; set; }
+        public string RiskRating { get; set; }
 
         [JsonProperty("segment")]
-        public object Segment { get; set; }
+        public string Segment { get; set; }
 
         [JsonProperty("pPeopleComplex")]
         public PPeopleComplex PPeopleComplex { get; set; }
@@ -748,7 +748,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public PolicyParticipant[] PolicyParticipants { get; set; }
 
         [JsonProperty("policyConditions")]
-        public object[] PolicyConditions { get; set; }
+        public string[] PolicyConditions { get; set; }
 
         [JsonProperty("policyContacts")]
         public PolicyContact[] PolicyContacts { get; set; }
@@ -760,10 +760,10 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public PolicyAddress[] PolicyAddresses { get; set; }
 
         [JsonProperty("policyBankAccounts")]
-        public object[] PolicyBankAccounts { get; set; }
+        public string[] PolicyBankAccounts { get; set; }
 
         [JsonProperty("policyEndorsements")]
-        public object[] PolicyEndorsements { get; set; }
+        public string[] PolicyEndorsements { get; set; }
 
         [JsonProperty("policyEngBillings")]
         public PolicyEngBilling[] PolicyEngBillings { get; set; }
@@ -772,13 +772,13 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public PolicyAgent[] PolicyAgents { get; set; }
 
         [JsonProperty("discounts")]
-        public object[] Discounts { get; set; }
+        public string[] Discounts { get; set; }
 
         [JsonProperty("taxes")]
-        public object[] Taxes { get; set; }
+        public string[] Taxes { get; set; }
 
         [JsonProperty("limits")]
-        public object[] Limits { get; set; }
+        public string[] Limits { get; set; }
 
         [JsonProperty("paymentPlan")]
         public PaymentPlan[] PaymentPlan { get; set; }
@@ -787,10 +787,10 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public Installment[] Installments { get; set; }
 
         [JsonProperty("questions")]
-        public object[] Questions { get; set; }
+        public string[] Questions { get; set; }
 
         [JsonProperty("documents")]
-        public object[] Documents { get; set; }
+        public string[] Documents { get; set; }
     }
 
     public partial class Commission
@@ -799,7 +799,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long AnnexId { get; set; }
 
         [JsonProperty("auxAnnexId")]
-        public object AuxAnnexId { get; set; }
+        public string AuxAnnexId { get; set; }
 
         [JsonProperty("commDimension")]
         public string CommDimension { get; set; }
@@ -811,13 +811,13 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long CommValue { get; set; }
 
         [JsonProperty("coverType")]
-        public object CoverType { get; set; }
+        public string CoverType { get; set; }
 
         [JsonProperty("currency")]
-        public object Currency { get; set; }
+        public string Currency { get; set; }
 
         [JsonProperty("engagementId")]
-        public object EngagementId { get; set; }
+        public string EngagementId { get; set; }
 
         [JsonProperty("holdCommission")]
         public string HoldCommission { get; set; }
@@ -844,10 +844,10 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public DateTimeOffset ValidTo { get; set; }
 
         [JsonProperty("insuredObjId")]
-        public object InsuredObjId { get; set; }
+        public string InsuredObjId { get; set; }
 
         [JsonProperty("grcId")]
-        public object GrcId { get; set; }
+        public string GrcId { get; set; }
 
         [JsonProperty("registrationDate")]
         public DateTimeOffset RegistrationDate { get; set; }
@@ -862,79 +862,79 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public DateTimeOffset UpdatedOn { get; set; }
 
         [JsonProperty("attrc1")]
-        public object Attrc1 { get; set; }
+        public string Attrc1 { get; set; }
 
         [JsonProperty("attrc10")]
-        public object Attrc10 { get; set; }
+        public string Attrc10 { get; set; }
 
         [JsonProperty("attrc2")]
-        public object Attrc2 { get; set; }
+        public string Attrc2 { get; set; }
 
         [JsonProperty("attrc3")]
-        public object Attrc3 { get; set; }
+        public string Attrc3 { get; set; }
 
         [JsonProperty("attrc4")]
-        public object Attrc4 { get; set; }
+        public string Attrc4 { get; set; }
 
         [JsonProperty("attrc5")]
-        public object Attrc5 { get; set; }
+        public string Attrc5 { get; set; }
 
         [JsonProperty("attrc6")]
-        public object Attrc6 { get; set; }
+        public string Attrc6 { get; set; }
 
         [JsonProperty("attrc7")]
-        public object Attrc7 { get; set; }
+        public string Attrc7 { get; set; }
 
         [JsonProperty("attrc8")]
-        public object Attrc8 { get; set; }
+        public string Attrc8 { get; set; }
 
         [JsonProperty("attrc9")]
-        public object Attrc9 { get; set; }
+        public string Attrc9 { get; set; }
 
         [JsonProperty("attrd1")]
-        public object Attrd1 { get; set; }
+        public string Attrd1 { get; set; }
 
         [JsonProperty("attrd2")]
-        public object Attrd2 { get; set; }
+        public string Attrd2 { get; set; }
 
         [JsonProperty("attrd3")]
-        public object Attrd3 { get; set; }
+        public string Attrd3 { get; set; }
 
         [JsonProperty("attrd4")]
-        public object Attrd4 { get; set; }
+        public string Attrd4 { get; set; }
 
         [JsonProperty("attrd5")]
-        public object Attrd5 { get; set; }
+        public string Attrd5 { get; set; }
 
         [JsonProperty("attrn1")]
-        public object Attrn1 { get; set; }
+        public string Attrn1 { get; set; }
 
         [JsonProperty("attrn10")]
-        public object Attrn10 { get; set; }
+        public string Attrn10 { get; set; }
 
         [JsonProperty("attrn2")]
-        public object Attrn2 { get; set; }
+        public string Attrn2 { get; set; }
 
         [JsonProperty("attrn3")]
-        public object Attrn3 { get; set; }
+        public string Attrn3 { get; set; }
 
         [JsonProperty("attrn4")]
-        public object Attrn4 { get; set; }
+        public string Attrn4 { get; set; }
 
         [JsonProperty("attrn5")]
-        public object Attrn5 { get; set; }
+        public string Attrn5 { get; set; }
 
         [JsonProperty("attrn6")]
-        public object Attrn6 { get; set; }
+        public string Attrn6 { get; set; }
 
         [JsonProperty("attrn7")]
-        public object Attrn7 { get; set; }
+        public string Attrn7 { get; set; }
 
         [JsonProperty("attrn8")]
-        public object Attrn8 { get; set; }
+        public string Attrn8 { get; set; }
 
         [JsonProperty("attrn9")]
-        public object Attrn9 { get; set; }
+        public string Attrn9 { get; set; }
     }
 
     public partial class Installment
@@ -946,7 +946,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long AnnexId { get; set; }
 
         [JsonProperty("auxAnnexId")]
-        public object AuxAnnexId { get; set; }
+        public string AuxAnnexId { get; set; }
 
         [JsonProperty("amntLocal")]
         public long AmntLocal { get; set; }
@@ -961,7 +961,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public DateTimeOffset OldCovered { get; set; }
 
         [JsonProperty("dateCovered")]
-        public DateTimeOffset DateCovered { get; set; }
+        public string DateCovered { get; set; }
 
         [JsonProperty("dateTopay")]
         public DateTimeOffset DateTopay { get; set; }
@@ -979,16 +979,16 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long InsuredObjId { get; set; }
 
         [JsonProperty("groupSeqNum")]
-        public object GroupSeqNum { get; set; }
+        public string GroupSeqNum { get; set; }
 
         [JsonProperty("attachedToGroup")]
-        public object AttachedToGroup { get; set; }
+        public string AttachedToGroup { get; set; }
 
-        [JsonProperty("objectId")]
-        public long ObjectId { get; set; }
+        [JsonProperty("stringId")]
+        public long stringId { get; set; }
 
-        [JsonProperty("objectType")]
-        public long ObjectType { get; set; }
+        [JsonProperty("stringType")]
+        public long stringType { get; set; }
 
         [JsonProperty("policyId")]
         public long PolicyId { get; set; }
@@ -1000,22 +1000,22 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long InsrType { get; set; }
 
         [JsonProperty("auxAnnexId")]
-        public object AuxAnnexId { get; set; }
+        public string AuxAnnexId { get; set; }
 
-        [JsonProperty("objectState")]
-        public long ObjectState { get; set; }
+        [JsonProperty("stringState")]
+        public long stringState { get; set; }
 
-        [JsonProperty("objectStateAux")]
-        public long ObjectStateAux { get; set; }
+        [JsonProperty("stringStateAux")]
+        public long stringStateAux { get; set; }
 
         [JsonProperty("riskClass")]
-        public object RiskClass { get; set; }
+        public string RiskClass { get; set; }
 
-        [JsonProperty("objectNum")]
-        public long ObjectNum { get; set; }
+        [JsonProperty("stringNum")]
+        public long stringNum { get; set; }
 
-        [JsonProperty("objectAlive")]
-        public long ObjectAlive { get; set; }
+        [JsonProperty("stringAlive")]
+        public long stringAlive { get; set; }
 
         [JsonProperty("actualValue")]
         public long ActualValue { get; set; }
@@ -1043,7 +1043,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public double IvCurrencyRate { get; set; }
 
         [JsonProperty("activityType")]
-        public object ActivityType { get; set; }
+        public string ActivityType { get; set; }
 
         [JsonProperty("totalInsuredValue")]
         public long TotalInsuredValue { get; set; }
@@ -1064,31 +1064,31 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public DateTimeOffset ChangeDate { get; set; }
 
         [JsonProperty("iop1")]
-        public object Iop1 { get; set; }
+        public string Iop1 { get; set; }
 
         [JsonProperty("iop2")]
-        public object Iop2 { get; set; }
+        public string Iop2 { get; set; }
 
         [JsonProperty("iop3")]
-        public object Iop3 { get; set; }
+        public string Iop3 { get; set; }
 
         [JsonProperty("riskLocationId")]
-        public object RiskLocationId { get; set; }
+        public string RiskLocationId { get; set; }
 
         [JsonProperty("locationRiskClass")]
-        public object LocationRiskClass { get; set; }
+        public string LocationRiskClass { get; set; }
 
         [JsonProperty("locationValue")]
-        public object LocationValue { get; set; }
+        public string LocationValue { get; set; }
 
         [JsonProperty("locvalDimension")]
-        public object LocvalDimension { get; set; }
+        public string LocvalDimension { get; set; }
 
         [JsonProperty("billingId")]
-        public object BillingId { get; set; }
+        public string BillingId { get; set; }
 
         [JsonProperty("mainInsObjId")]
-        public object MainInsObjId { get; set; }
+        public string MainInsObjId { get; set; }
 
         [JsonProperty("registrationDate")]
         public DateTimeOffset RegistrationDate { get; set; }
@@ -1097,10 +1097,10 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string Username { get; set; }
 
         [JsonProperty("groupId")]
-        public object GroupId { get; set; }
+        public string GroupId { get; set; }
 
         [JsonProperty("subgroupId")]
-        public object SubgroupId { get; set; }
+        public string SubgroupId { get; set; }
 
         [JsonProperty("updatedBy")]
         public string UpdatedBy { get; set; }
@@ -1109,109 +1109,109 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public DateTimeOffset UpdatedOn { get; set; }
 
         [JsonProperty("attrc1")]
-        public object Attrc1 { get; set; }
+        public string Attrc1 { get; set; }
 
         [JsonProperty("attrc10")]
-        public object Attrc10 { get; set; }
+        public string Attrc10 { get; set; }
 
         [JsonProperty("attrc2")]
-        public object Attrc2 { get; set; }
+        public string Attrc2 { get; set; }
 
         [JsonProperty("attrc3")]
-        public object Attrc3 { get; set; }
+        public string Attrc3 { get; set; }
 
         [JsonProperty("attrc4")]
-        public object Attrc4 { get; set; }
+        public string Attrc4 { get; set; }
 
         [JsonProperty("attrc5")]
-        public object Attrc5 { get; set; }
+        public string Attrc5 { get; set; }
 
         [JsonProperty("attrc6")]
-        public object Attrc6 { get; set; }
+        public string Attrc6 { get; set; }
 
         [JsonProperty("attrc7")]
-        public object Attrc7 { get; set; }
+        public string Attrc7 { get; set; }
 
         [JsonProperty("attrc8")]
-        public object Attrc8 { get; set; }
+        public string Attrc8 { get; set; }
 
         [JsonProperty("attrc9")]
-        public object Attrc9 { get; set; }
+        public string Attrc9 { get; set; }
 
         [JsonProperty("attrd1")]
-        public object Attrd1 { get; set; }
+        public string Attrd1 { get; set; }
 
         [JsonProperty("attrd2")]
-        public object Attrd2 { get; set; }
+        public string Attrd2 { get; set; }
 
         [JsonProperty("attrd3")]
-        public object Attrd3 { get; set; }
+        public string Attrd3 { get; set; }
 
         [JsonProperty("attrd4")]
-        public object Attrd4 { get; set; }
+        public string Attrd4 { get; set; }
 
         [JsonProperty("attrd5")]
-        public object Attrd5 { get; set; }
+        public string Attrd5 { get; set; }
 
         [JsonProperty("attrn1")]
-        public object Attrn1 { get; set; }
+        public string Attrn1 { get; set; }
 
         [JsonProperty("attrn10")]
-        public object Attrn10 { get; set; }
+        public string Attrn10 { get; set; }
 
         [JsonProperty("attrn2")]
-        public object Attrn2 { get; set; }
+        public string Attrn2 { get; set; }
 
         [JsonProperty("attrn3")]
-        public object Attrn3 { get; set; }
+        public string Attrn3 { get; set; }
 
         [JsonProperty("attrn4")]
-        public object Attrn4 { get; set; }
+        public string Attrn4 { get; set; }
 
         [JsonProperty("attrn5")]
-        public object Attrn5 { get; set; }
+        public string Attrn5 { get; set; }
 
         [JsonProperty("attrn6")]
-        public object Attrn6 { get; set; }
+        public string Attrn6 { get; set; }
 
         [JsonProperty("attrn7")]
-        public object Attrn7 { get; set; }
+        public string Attrn7 { get; set; }
 
         [JsonProperty("attrn8")]
-        public object Attrn8 { get; set; }
+        public string Attrn8 { get; set; }
 
         [JsonProperty("attrn9")]
-        public object Attrn9 { get; set; }
+        public string Attrn9 { get; set; }
 
         [JsonProperty("covers")]
         public Cover[] Covers { get; set; }
 
         [JsonProperty("discounts")]
-        public object[] Discounts { get; set; }
+        public string[] Discounts { get; set; }
 
         [JsonProperty("limits")]
-        public object[] Limits { get; set; }
+        public string[] Limits { get; set; }
 
         [JsonProperty("commissions")]
-        public object[] Commissions { get; set; }
+        public string[] Commissions { get; set; }
 
         [JsonProperty("policyParticipantsDtl")]
-        public object[] PolicyParticipantsDtl { get; set; }
+        public string[] PolicyParticipantsDtl { get; set; }
 
         [JsonProperty("policyEngBillingsDtl")]
-        public object[] PolicyEngBillingsDtl { get; set; }
+        public string[] PolicyEngBillingsDtl { get; set; }
 
-        [JsonProperty("insuredObjectSuppl")]
-        public object[] InsuredObjectSuppl { get; set; }
+        [JsonProperty("insuredstringSuppl")]
+        public string[] InsuredstringSuppl { get; set; }
 
         [JsonProperty("insuredEntity")]
         public InsuredEntity InsuredEntity { get; set; }
 
         [JsonProperty("questions")]
-        public object[] Questions { get; set; }
+        public string[] Questions { get; set; }
 
         [JsonProperty("documents")]
-        public object[] Documents { get; set; }
+        public string[] Documents { get; set; }
     }
 
     public partial class Cover
@@ -1238,7 +1238,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long InsrType { get; set; }
 
         [JsonProperty("auxAnnexId")]
-        public object AuxAnnexId { get; set; }
+        public string AuxAnnexId { get; set; }
 
         [JsonProperty("insuredValue")]
         public long InsuredValue { get; set; }
@@ -1258,8 +1258,8 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         [JsonProperty("tariffPercent")]
         public long TariffPercent { get; set; }
 
-        [JsonProperty("objectNum")]
-        public long ObjectNum { get; set; }
+        [JsonProperty("stringNum")]
+        public long stringNum { get; set; }
 
         [JsonProperty("fullPremium")]
         public long FullPremium { get; set; }
@@ -1286,16 +1286,16 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string DurDimension { get; set; }
 
         [JsonProperty("coverOrder")]
-        public long CoverOrder { get; set; }
+        public long? CoverOrder { get; set; }
 
         [JsonProperty("dateCovered")]
-        public DateTimeOffset DateCovered { get; set; }
+        public string DateCovered { get; set; }
 
         [JsonProperty("annualPremium")]
         public long AnnualPremium { get; set; }
 
         [JsonProperty("riAmountSubject")]
-        public object RiAmountSubject { get; set; }
+        public string RiAmountSubject { get; set; }
 
         [JsonProperty("rateFullPremium")]
         public long RateFullPremium { get; set; }
@@ -1304,16 +1304,16 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long RateAnnualPremium { get; set; }
 
         [JsonProperty("packageId")]
-        public object PackageId { get; set; }
+        public string PackageId { get; set; }
 
         [JsonProperty("locationValue")]
-        public object LocationValue { get; set; }
+        public string LocationValue { get; set; }
 
         [JsonProperty("locvalDimension")]
-        public object LocvalDimension { get; set; }
+        public string LocvalDimension { get; set; }
 
         [JsonProperty("selectedCover")]
-        public object SelectedCover { get; set; }
+        public string SelectedCover { get; set; }
 
         [JsonProperty("netPremium")]
         public long NetPremium { get; set; }
@@ -1321,14 +1321,14 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         [JsonProperty("anniversary")]
         public DateTimeOffset Anniversary { get; set; }
 
-        [JsonProperty("claimObjectType")]
-        public long ClaimObjectType { get; set; }
+        [JsonProperty("claimstringType")]
+        public long ClaimstringType { get; set; }
 
         [JsonProperty("ivType")]
         public string IvType { get; set; }
 
         [JsonProperty("riskClass")]
-        public object RiskClass { get; set; }
+        public string RiskClass { get; set; }
 
         [JsonProperty("coverPaymentSource")]
         public string CoverPaymentSource { get; set; }
@@ -1337,16 +1337,16 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string Designation { get; set; }
 
         [JsonProperty("grcSrv1")]
-        public object GrcSrv1 { get; set; }
+        public string GrcSrv1 { get; set; }
 
         [JsonProperty("grcSrv2")]
-        public object GrcSrv2 { get; set; }
+        public string GrcSrv2 { get; set; }
 
         [JsonProperty("grcSrv3")]
-        public object GrcSrv3 { get; set; }
+        public string GrcSrv3 { get; set; }
 
         [JsonProperty("waiver")]
-        public object Waiver { get; set; }
+        public string Waiver { get; set; }
 
         [JsonProperty("registrationDate")]
         public DateTimeOffset RegistrationDate { get; set; }
@@ -1358,19 +1358,19 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long GrcOrgId { get; set; }
 
         [JsonProperty("grcRefId")]
-        public object GrcRefId { get; set; }
+        public string GrcRefId { get; set; }
 
         [JsonProperty("sliceType")]
-        public object SliceType { get; set; }
+        public string SliceType { get; set; }
 
         [JsonProperty("coverLob")]
         public string CoverLob { get; set; }
 
         [JsonProperty("groupId")]
-        public object GroupId { get; set; }
+        public string GroupId { get; set; }
 
         [JsonProperty("subgroupId")]
-        public object SubgroupId { get; set; }
+        public string SubgroupId { get; set; }
 
         [JsonProperty("tariffRule")]
         public string TariffRule { get; set; }
@@ -1382,145 +1382,145 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public DateTimeOffset UpdatedOn { get; set; }
 
         [JsonProperty("attrc1")]
-        public object Attrc1 { get; set; }
+        public string Attrc1 { get; set; }
 
         [JsonProperty("attrc10")]
-        public object Attrc10 { get; set; }
+        public string Attrc10 { get; set; }
 
         [JsonProperty("attrc2")]
-        public object Attrc2 { get; set; }
+        public string Attrc2 { get; set; }
 
         [JsonProperty("attrc3")]
-        public object Attrc3 { get; set; }
+        public string Attrc3 { get; set; }
 
         [JsonProperty("attrc4")]
-        public object Attrc4 { get; set; }
+        public string Attrc4 { get; set; }
 
         [JsonProperty("attrc5")]
-        public object Attrc5 { get; set; }
+        public string Attrc5 { get; set; }
 
         [JsonProperty("attrc6")]
-        public object Attrc6 { get; set; }
+        public string Attrc6 { get; set; }
 
         [JsonProperty("attrc7")]
-        public object Attrc7 { get; set; }
+        public string Attrc7 { get; set; }
 
         [JsonProperty("attrc8")]
-        public object Attrc8 { get; set; }
+        public string Attrc8 { get; set; }
 
         [JsonProperty("attrc9")]
-        public object Attrc9 { get; set; }
+        public string Attrc9 { get; set; }
 
         [JsonProperty("attrd1")]
-        public object Attrd1 { get; set; }
+        public string Attrd1 { get; set; }
 
         [JsonProperty("attrd2")]
-        public object Attrd2 { get; set; }
+        public string Attrd2 { get; set; }
 
         [JsonProperty("attrd3")]
-        public object Attrd3 { get; set; }
+        public string Attrd3 { get; set; }
 
         [JsonProperty("attrd4")]
-        public object Attrd4 { get; set; }
+        public string Attrd4 { get; set; }
 
         [JsonProperty("attrd5")]
-        public object Attrd5 { get; set; }
+        public string Attrd5 { get; set; }
 
         [JsonProperty("attrn1")]
-        public object Attrn1 { get; set; }
+        public string Attrn1 { get; set; }
 
         [JsonProperty("attrn10")]
-        public object Attrn10 { get; set; }
+        public string Attrn10 { get; set; }
 
         [JsonProperty("attrn2")]
-        public object Attrn2 { get; set; }
+        public string Attrn2 { get; set; }
 
         [JsonProperty("attrn3")]
-        public object Attrn3 { get; set; }
+        public string Attrn3 { get; set; }
 
         [JsonProperty("attrn4")]
-        public object Attrn4 { get; set; }
+        public string Attrn4 { get; set; }
 
         [JsonProperty("attrn5")]
-        public object Attrn5 { get; set; }
+        public string Attrn5 { get; set; }
 
         [JsonProperty("attrn6")]
-        public object Attrn6 { get; set; }
+        public string Attrn6 { get; set; }
 
         [JsonProperty("attrn7")]
-        public object Attrn7 { get; set; }
+        public string Attrn7 { get; set; }
 
         [JsonProperty("attrn8")]
-        public object Attrn8 { get; set; }
+        public string Attrn8 { get; set; }
 
         [JsonProperty("attrn9")]
-        public object Attrn9 { get; set; }
+        public string Attrn9 { get; set; }
 
         [JsonProperty("risks")]
-        public object[] Risks { get; set; }
+        public string[] Risks { get; set; }
 
         [JsonProperty("invAccounts")]
-        public object[] InvAccounts { get; set; }
+        public string[] InvAccounts { get; set; }
 
         [JsonProperty("discounts")]
-        public object[] Discounts { get; set; }
+        public string[] Discounts { get; set; }
 
         [JsonProperty("taxes")]
-        public object[] Taxes { get; set; }
+        public string[] Taxes { get; set; }
 
         [JsonProperty("limits")]
-        public object[] Limits { get; set; }
+        public string[] Limits { get; set; }
 
         [JsonProperty("commissions")]
-        public object[] Commissions { get; set; }
+        public string[] Commissions { get; set; }
 
         [JsonProperty("policyParticipantsDtl")]
-        public object[] PolicyParticipantsDtl { get; set; }
+        public string[] PolicyParticipantsDtl { get; set; }
 
         [JsonProperty("policyEngBillingsDtl")]
-        public object[] PolicyEngBillingsDtl { get; set; }
+        public string[] PolicyEngBillingsDtl { get; set; }
 
         [JsonProperty("policyEndorsements")]
-        public object[] PolicyEndorsements { get; set; }
+        public string[] PolicyEndorsements { get; set; }
     }
 
     public partial class InsuredEntity
     {
-        [JsonProperty("objectId")]
-        public long ObjectId { get; set; }
+        [JsonProperty("stringId")]
+        public long stringId { get; set; }
 
-        [JsonProperty("objectType")]
-        public long ObjectType { get; set; }
+        [JsonProperty("stringType")]
+        public long stringType { get; set; }
 
         [JsonProperty("oAccinsured")]
-        public object OAccinsured { get; set; }
+        public string OAccinsured { get; set; }
 
         [JsonProperty("oCar")]
         public OCar OCar { get; set; }
 
         [JsonProperty("oProperty")]
-        public object OProperty { get; set; }
+        public string OProperty { get; set; }
 
         [JsonProperty("oLoss")]
-        public object OLoss { get; set; }
+        public string OLoss { get; set; }
 
         [JsonProperty("oGroupIns")]
-        public object OGroupIns { get; set; }
+        public string OGroupIns { get; set; }
 
         [JsonProperty("oLiability")]
-        public object OLiability { get; set; }
+        public string OLiability { get; set; }
     }
 
     public partial class OCar
     {
         [JsonProperty("errorMessage")]
-        public object ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; }
 
         [JsonProperty("operation")]
-        public object Operation { get; set; }
+        public string Operation { get; set; }
 
-        [JsonProperty("objectId")]
-        public long ObjectId { get; set; }
+        [JsonProperty("stringId")]
+        public long stringId { get; set; }
 
         [JsonProperty("carType")]
         
@@ -1541,34 +1541,34 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
 
         [JsonProperty("model")]
         
-        public long Model { get; set; }
+        public string Model { get; set; }
 
         [JsonProperty("modification")]
-        public object Modification { get; set; }
+        public string Modification { get; set; }
 
         [JsonProperty("ccmTon")]
-        public object CcmTon { get; set; }
+        public string CcmTon { get; set; }
 
         [JsonProperty("tonage")]
-        public long Tonage { get; set; }
+        public string Tonage { get; set; }
 
         [JsonProperty("carUsage")]
-        public object CarUsage { get; set; }
+        public string CarUsage { get; set; }
 
         [JsonProperty("seatsNum")]
-        public long SeatsNum { get; set; }
+        public string SeatsNum { get; set; }
 
         [JsonProperty("doorNum")]
-        public long DoorNum { get; set; }
+        public string DoorNum { get; set; }
 
         [JsonProperty("engine")]
         public string Engine { get; set; }
 
         [JsonProperty("engineType")]
-        public object EngineType { get; set; }
+        public string EngineType { get; set; }
 
         [JsonProperty("fuelType")]
-        public object FuelType { get; set; }
+        public string FuelType { get; set; }
 
         [JsonProperty("paintType")]
         
@@ -1578,7 +1578,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long ProdYear { get; set; }
 
         [JsonProperty("carAge")]
-        public long CarAge { get; set; }
+        public string CarAge { get; set; }
 
         [JsonProperty("prodType")]
         
@@ -1586,98 +1586,98 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
 
         [JsonProperty("carColour")]
         
-        public long CarColour { get; set; }
+        public string CarColour { get; set; }
 
         [JsonProperty("regType")]
         
-        public long RegType { get; set; }
+        public string RegType { get; set; }
 
         [JsonProperty("enginePower")]
-        public long EnginePower { get; set; }
+        public string EnginePower { get; set; }
 
         [JsonProperty("bonusMalus")]
-        public long BonusMalus { get; set; }
+        public string BonusMalus { get; set; }
 
         [JsonProperty("carbodyType")]
         
-        public long CarbodyType { get; set; }
+        public string CarbodyType { get; set; }
 
         [JsonProperty("driveType")]
-        public object DriveType { get; set; }
+        public string DriveType { get; set; }
 
         [JsonProperty("windowColor")]
         
-        public long WindowColor { get; set; }
+        public string WindowColor { get; set; }
 
         [JsonProperty("modified")]
         
-        public long Modified { get; set; }
+        public string Modified { get; set; }
 
         [JsonProperty("vehicleKey")]
-        public object VehicleKey { get; set; }
+        public string VehicleKey { get; set; }
 
         [JsonProperty("notes")]
-        public object Notes { get; set; }
+        public string Notes { get; set; }
 
         [JsonProperty("ocp1")]
-        public object Ocp1 { get; set; }
+        public string Ocp1 { get; set; }
 
         [JsonProperty("ocp2")]
-        public object Ocp2 { get; set; }
+        public string Ocp2 { get; set; }
 
         [JsonProperty("ocp3")]
-        public object Ocp3 { get; set; }
+        public string Ocp3 { get; set; }
 
         [JsonProperty("ocp4")]
-        public object Ocp4 { get; set; }
+        public string Ocp4 { get; set; }
 
         [JsonProperty("ocp5")]
-        public object Ocp5 { get; set; }
+        public string Ocp5 { get; set; }
 
         [JsonProperty("ocp6")]
-        public object Ocp6 { get; set; }
+        public string Ocp6 { get; set; }
 
         [JsonProperty("ocp7")]
-        public object Ocp7 { get; set; }
+        public string Ocp7 { get; set; }
 
         [JsonProperty("ocp8")]
-        public object Ocp8 { get; set; }
+        public string Ocp8 { get; set; }
 
         [JsonProperty("ocp9")]
-        public object Ocp9 { get; set; }
+        public string Ocp9 { get; set; }
 
         [JsonProperty("ocp10")]
-        public object Ocp10 { get; set; }
+        public string Ocp10 { get; set; }
 
         [JsonProperty("ocp11")]
-        public object Ocp11 { get; set; }
+        public string Ocp11 { get; set; }
 
         [JsonProperty("ocp12")]
-        public object Ocp12 { get; set; }
+        public string Ocp12 { get; set; }
 
         [JsonProperty("ocp13")]
-        public object Ocp13 { get; set; }
+        public string Ocp13 { get; set; }
 
         [JsonProperty("ocp14")]
-        public object Ocp14 { get; set; }
+        public string Ocp14 { get; set; }
 
         [JsonProperty("ocp15")]
-        public object Ocp15 { get; set; }
+        public string Ocp15 { get; set; }
 
         [JsonProperty("ocp16")]
-        public object Ocp16 { get; set; }
+        public string Ocp16 { get; set; }
 
         [JsonProperty("ocp17")]
-        public object Ocp17 { get; set; }
+        public string Ocp17 { get; set; }
 
         [JsonProperty("ocp18")]
-        public object Ocp18 { get; set; }
+        public string Ocp18 { get; set; }
 
         [JsonProperty("ocp19")]
-        public object Ocp19 { get; set; }
+        public string Ocp19 { get; set; }
 
         [JsonProperty("ocp20")]
-        public object Ocp20 { get; set; }
+        public string Ocp20 { get; set; }
     }
 
     public partial class PaymentPlan
@@ -1695,10 +1695,10 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long AnnexId { get; set; }
 
         [JsonProperty("applDetail")]
-        public object ApplDetail { get; set; }
+        public string ApplDetail { get; set; }
 
         [JsonProperty("applStatus")]
-        public object ApplStatus { get; set; }
+        public string ApplStatus { get; set; }
 
         [JsonProperty("currency")]
         public string Currency { get; set; }
@@ -1707,13 +1707,13 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public DateTimeOffset? DueDate { get; set; }
 
         [JsonProperty("engagementId")]
-        public object EngagementId { get; set; }
+        public string EngagementId { get; set; }
 
         [JsonProperty("engagementName")]
-        public object EngagementName { get; set; }
+        public string EngagementName { get; set; }
 
         [JsonProperty("externalId")]
-        public object ExternalId { get; set; }
+        public string ExternalId { get; set; }
 
         [JsonProperty("freeInstalment")]
         public string FreeInstalment { get; set; }
@@ -1725,13 +1725,13 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string InstalmentPerYear { get; set; }
 
         [JsonProperty("invoiceNo")]
-        public object InvoiceNo { get; set; }
+        public string InvoiceNo { get; set; }
 
         [JsonProperty("nextPmntStatus")]
-        public object NextPmntStatus { get; set; }
+        public string NextPmntStatus { get; set; }
 
         [JsonProperty("paidOn")]
-        public object PaidOn { get; set; }
+        public string PaidOn { get; set; }
 
         [JsonProperty("periodId")]
         public long? PeriodId { get; set; }
@@ -1740,10 +1740,10 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string PlanType { get; set; }
 
         [JsonProperty("pmntReason")]
-        public object PmntReason { get; set; }
+        public string PmntReason { get; set; }
 
         [JsonProperty("pmntStatus")]
-        public object PmntStatus { get; set; }
+        public string PmntStatus { get; set; }
 
         [JsonProperty("policyId")]
         public long PolicyId { get; set; }
@@ -1759,7 +1759,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long? PplanLinkId { get; set; }
 
         [JsonProperty("prevPmntStatus")]
-        public object PrevPmntStatus { get; set; }
+        public string PrevPmntStatus { get; set; }
 
         [JsonProperty("processed")]
         public string Processed { get; set; }
@@ -1768,94 +1768,94 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public DateTimeOffset RegistrationDate { get; set; }
 
         [JsonProperty("relatedApplId")]
-        public object RelatedApplId { get; set; }
+        public string RelatedApplId { get; set; }
 
         [JsonProperty("reversedApplId")]
-        public object ReversedApplId { get; set; }
+        public string ReversedApplId { get; set; }
 
         [JsonProperty("username")]
         public string Username { get; set; }
 
         [JsonProperty("wrReason")]
-        public object WrReason { get; set; }
+        public string WrReason { get; set; }
 
         [JsonProperty("attr1")]
-        public object Attr1 { get; set; }
+        public string Attr1 { get; set; }
 
         [JsonProperty("attr10")]
-        public object Attr10 { get; set; }
+        public string Attr10 { get; set; }
 
         [JsonProperty("attr2")]
-        public object Attr2 { get; set; }
+        public string Attr2 { get; set; }
 
         [JsonProperty("attr3")]
-        public object Attr3 { get; set; }
+        public string Attr3 { get; set; }
 
         [JsonProperty("attr4")]
-        public object Attr4 { get; set; }
+        public string Attr4 { get; set; }
 
         [JsonProperty("attr5")]
-        public object Attr5 { get; set; }
+        public string Attr5 { get; set; }
 
         [JsonProperty("attr6")]
-        public object Attr6 { get; set; }
+        public string Attr6 { get; set; }
 
         [JsonProperty("attr7")]
-        public object Attr7 { get; set; }
+        public string Attr7 { get; set; }
 
         [JsonProperty("attr8")]
-        public object Attr8 { get; set; }
+        public string Attr8 { get; set; }
 
         [JsonProperty("attr9")]
-        public object Attr9 { get; set; }
+        public string Attr9 { get; set; }
 
         [JsonProperty("attrd1")]
-        public object Attrd1 { get; set; }
+        public string Attrd1 { get; set; }
 
         [JsonProperty("attrd2")]
-        public object Attrd2 { get; set; }
+        public string Attrd2 { get; set; }
 
         [JsonProperty("attrd3")]
-        public object Attrd3 { get; set; }
+        public string Attrd3 { get; set; }
 
         [JsonProperty("attrd4")]
-        public object Attrd4 { get; set; }
+        public string Attrd4 { get; set; }
 
         [JsonProperty("attrd5")]
-        public object Attrd5 { get; set; }
+        public string Attrd5 { get; set; }
 
         [JsonProperty("attrn1")]
-        public object Attrn1 { get; set; }
+        public string Attrn1 { get; set; }
 
         [JsonProperty("attrn2")]
-        public object Attrn2 { get; set; }
+        public string Attrn2 { get; set; }
 
         [JsonProperty("attrn3")]
-        public object Attrn3 { get; set; }
+        public string Attrn3 { get; set; }
 
         [JsonProperty("attrn4")]
-        public object Attrn4 { get; set; }
+        public string Attrn4 { get; set; }
 
         [JsonProperty("attrn5")]
-        public object Attrn5 { get; set; }
+        public string Attrn5 { get; set; }
 
         [JsonProperty("attrn6")]
-        public object Attrn6 { get; set; }
+        public string Attrn6 { get; set; }
 
         [JsonProperty("attrn7")]
-        public object Attrn7 { get; set; }
+        public string Attrn7 { get; set; }
 
         [JsonProperty("attrn8")]
-        public object Attrn8 { get; set; }
+        public string Attrn8 { get; set; }
 
         [JsonProperty("attrn9")]
-        public object Attrn9 { get; set; }
+        public string Attrn9 { get; set; }
 
         [JsonProperty("attrn10")]
-        public object Attrn10 { get; set; }
+        public string Attrn10 { get; set; }
 
         [JsonProperty("engBillingId")]
-        public object EngBillingId { get; set; }
+        public string EngBillingId { get; set; }
 
         [JsonProperty("updatedBy")]
         public string UpdatedBy { get; set; }
@@ -1873,25 +1873,25 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string AddressPurpose { get; set; }
 
         [JsonProperty("annexId")]
-        public long AnnexId { get; set; }
+        public string AnnexId { get; set; }
 
         [JsonProperty("auxAnnexId")]
-        public object AuxAnnexId { get; set; }
+        public string AuxAnnexId { get; set; }
 
         [JsonProperty("engagementId")]
-        public object EngagementId { get; set; }
+        public string EngagementId { get; set; }
 
         [JsonProperty("policyAddressId")]
-        public long PolicyAddressId { get; set; }
+        public string PolicyAddressId { get; set; }
 
         [JsonProperty("policyId")]
-        public long PolicyId { get; set; }
+        public string PolicyId { get; set; }
 
         [JsonProperty("validFrom")]
         public DateTimeOffset ValidFrom { get; set; }
 
         [JsonProperty("validTo")]
-        public object ValidTo { get; set; }
+        public string ValidTo { get; set; }
 
         [JsonProperty("pAddress")]
         public Address PAddress { get; set; }
@@ -1906,7 +1906,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long AgentId { get; set; }
 
         [JsonProperty("engagementId")]
-        public object EngagementId { get; set; }
+        public string EngagementId { get; set; }
 
         [JsonProperty("policyId")]
         public long PolicyId { get; set; }
@@ -1915,7 +1915,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long AnnexId { get; set; }
 
         [JsonProperty("auxAnnexId")]
-        public object AuxAnnexId { get; set; }
+        public string AuxAnnexId { get; set; }
 
         [JsonProperty("agentRole")]
         public string AgentRole { get; set; }
@@ -1927,82 +1927,82 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public DateTimeOffset ValidFrom { get; set; }
 
         [JsonProperty("validTo")]
-        public object ValidTo { get; set; }
+        public string ValidTo { get; set; }
 
         [JsonProperty("attrc1")]
-        public object Attrc1 { get; set; }
+        public string Attrc1 { get; set; }
 
         [JsonProperty("attrc10")]
-        public object Attrc10 { get; set; }
+        public string Attrc10 { get; set; }
 
         [JsonProperty("attrc2")]
-        public object Attrc2 { get; set; }
+        public string Attrc2 { get; set; }
 
         [JsonProperty("attrc3")]
-        public object Attrc3 { get; set; }
+        public string Attrc3 { get; set; }
 
         [JsonProperty("attrc4")]
-        public object Attrc4 { get; set; }
+        public string Attrc4 { get; set; }
 
         [JsonProperty("attrc5")]
-        public object Attrc5 { get; set; }
+        public string Attrc5 { get; set; }
 
         [JsonProperty("attrc6")]
-        public object Attrc6 { get; set; }
+        public string Attrc6 { get; set; }
 
         [JsonProperty("attrc7")]
-        public object Attrc7 { get; set; }
+        public string Attrc7 { get; set; }
 
         [JsonProperty("attrc8")]
-        public object Attrc8 { get; set; }
+        public string Attrc8 { get; set; }
 
         [JsonProperty("attrc9")]
-        public object Attrc9 { get; set; }
+        public string Attrc9 { get; set; }
 
         [JsonProperty("attrd1")]
-        public object Attrd1 { get; set; }
+        public string Attrd1 { get; set; }
 
         [JsonProperty("attrd2")]
-        public object Attrd2 { get; set; }
+        public string Attrd2 { get; set; }
 
         [JsonProperty("attrd3")]
-        public object Attrd3 { get; set; }
+        public string Attrd3 { get; set; }
 
         [JsonProperty("attrd4")]
-        public object Attrd4 { get; set; }
+        public string Attrd4 { get; set; }
 
         [JsonProperty("attrd5")]
-        public object Attrd5 { get; set; }
+        public string Attrd5 { get; set; }
 
         [JsonProperty("attrn1")]
-        public object Attrn1 { get; set; }
+        public string Attrn1 { get; set; }
 
         [JsonProperty("attrn10")]
-        public object Attrn10 { get; set; }
+        public string Attrn10 { get; set; }
 
         [JsonProperty("attrn2")]
-        public object Attrn2 { get; set; }
+        public string Attrn2 { get; set; }
 
         [JsonProperty("attrn3")]
-        public object Attrn3 { get; set; }
+        public string Attrn3 { get; set; }
 
         [JsonProperty("attrn4")]
-        public object Attrn4 { get; set; }
+        public string Attrn4 { get; set; }
 
         [JsonProperty("attrn5")]
-        public object Attrn5 { get; set; }
+        public string Attrn5 { get; set; }
 
         [JsonProperty("attrn6")]
-        public object Attrn6 { get; set; }
+        public string Attrn6 { get; set; }
 
         [JsonProperty("attrn7")]
-        public object Attrn7 { get; set; }
+        public string Attrn7 { get; set; }
 
         [JsonProperty("attrn8")]
-        public object Attrn8 { get; set; }
+        public string Attrn8 { get; set; }
 
         [JsonProperty("attrn9")]
-        public object Attrn9 { get; set; }
+        public string Attrn9 { get; set; }
 
         [JsonProperty("updatedBy")]
         public string UpdatedBy { get; set; }
@@ -2017,7 +2017,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long AnnexId { get; set; }
 
         [JsonProperty("auxAnnexId")]
-        public object AuxAnnexId { get; set; }
+        public string AuxAnnexId { get; set; }
 
         [JsonProperty("contactId")]
         public long ContactId { get; set; }
@@ -2026,19 +2026,19 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string ContactPurpose { get; set; }
 
         [JsonProperty("engagementId")]
-        public object EngagementId { get; set; }
+        public string EngagementId { get; set; }
 
         [JsonProperty("policyContactId")]
-        public long PolicyContactId { get; set; }
+        public string PolicyContactId { get; set; }
 
         [JsonProperty("policyId")]
-        public long PolicyId { get; set; }
+        public string PolicyId { get; set; }
 
         [JsonProperty("validFrom")]
         public DateTimeOffset ValidFrom { get; set; }
 
         [JsonProperty("validTo")]
-        public object ValidTo { get; set; }
+        public string ValidTo { get; set; }
 
         [JsonProperty("pContacts")]
         public Contact PContacts { get; set; }
@@ -2050,16 +2050,16 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long EngBillingId { get; set; }
 
         [JsonProperty("engagementId")]
-        public long EngagementId { get; set; }
+        public string EngagementId { get; set; }
 
         [JsonProperty("policyId")]
-        public long PolicyId { get; set; }
+        public string PolicyId { get; set; }
 
         [JsonProperty("annexId")]
-        public long AnnexId { get; set; }
+        public string AnnexId { get; set; }
 
         [JsonProperty("auxAnnexId")]
-        public object AuxAnnexId { get; set; }
+        public string AuxAnnexId { get; set; }
 
         [JsonProperty("paymentWay")]
         
@@ -2087,85 +2087,85 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string RecordDesignation { get; set; }
 
         [JsonProperty("upToYears")]
-        public object UpToYears { get; set; }
+        public string UpToYears { get; set; }
 
         [JsonProperty("nfo")]
-        public object Nfo { get; set; }
+        public string Nfo { get; set; }
 
         [JsonProperty("attr1")]
-        public object Attr1 { get; set; }
+        public string Attr1 { get; set; }
 
         [JsonProperty("attr10")]
-        public object Attr10 { get; set; }
+        public string Attr10 { get; set; }
 
         [JsonProperty("attr2")]
-        public object Attr2 { get; set; }
+        public string Attr2 { get; set; }
 
         [JsonProperty("attr3")]
-        public object Attr3 { get; set; }
+        public string Attr3 { get; set; }
 
         [JsonProperty("attr4")]
-        public object Attr4 { get; set; }
+        public string Attr4 { get; set; }
 
         [JsonProperty("attr5")]
-        public object Attr5 { get; set; }
+        public string Attr5 { get; set; }
 
         [JsonProperty("attr6")]
-        public object Attr6 { get; set; }
+        public string Attr6 { get; set; }
 
         [JsonProperty("attr7")]
-        public object Attr7 { get; set; }
+        public string Attr7 { get; set; }
 
         [JsonProperty("attr8")]
-        public object Attr8 { get; set; }
+        public string Attr8 { get; set; }
 
         [JsonProperty("attr9")]
-        public object Attr9 { get; set; }
+        public string Attr9 { get; set; }
 
         [JsonProperty("attrd1")]
-        public object Attrd1 { get; set; }
+        public string Attrd1 { get; set; }
 
         [JsonProperty("attrd2")]
-        public object Attrd2 { get; set; }
+        public string Attrd2 { get; set; }
 
         [JsonProperty("attrd3")]
-        public object Attrd3 { get; set; }
+        public string Attrd3 { get; set; }
 
         [JsonProperty("attrd4")]
-        public object Attrd4 { get; set; }
+        public string Attrd4 { get; set; }
 
         [JsonProperty("attrd5")]
-        public object Attrd5 { get; set; }
+        public string Attrd5 { get; set; }
 
         [JsonProperty("attrn1")]
-        public object Attrn1 { get; set; }
+        public string Attrn1 { get; set; }
 
         [JsonProperty("attrn10")]
-        public object Attrn10 { get; set; }
+        public string Attrn10 { get; set; }
 
         [JsonProperty("attrn2")]
-        public object Attrn2 { get; set; }
+        public string Attrn2 { get; set; }
 
         [JsonProperty("attrn3")]
-        public object Attrn3 { get; set; }
+        public string Attrn3 { get; set; }
 
         [JsonProperty("attrn4")]
-        public object Attrn4 { get; set; }
+        public string Attrn4 { get; set; }
 
         [JsonProperty("attrn5")]
-        public object Attrn5 { get; set; }
+        public string Attrn5 { get; set; }
 
         [JsonProperty("attrn6")]
-        public object Attrn6 { get; set; }
+        public string Attrn6 { get; set; }
 
         [JsonProperty("attrn7")]
-        public object Attrn7 { get; set; }
+        public string Attrn7 { get; set; }
 
         [JsonProperty("attrn8")]
-        public object Attrn8 { get; set; }
+        public string Attrn8 { get; set; }
 
         [JsonProperty("attrn9")]
-        public object Attrn9 { get; set; }
+        public string Attrn9 { get; set; }
 
         [JsonProperty("registrationDate")]
         public DateTimeOffset RegistrationDate { get; set; }
@@ -2198,10 +2198,10 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public long AnnexId { get; set; }
 
         [JsonProperty("auxAnnexId")]
-        public object AuxAnnexId { get; set; }
+        public string AuxAnnexId { get; set; }
 
         [JsonProperty("engagementId")]
-        public object EngagementId { get; set; }
+        public string EngagementId { get; set; }
 
         [JsonProperty("manId")]
         public long ManId { get; set; }
@@ -2237,85 +2237,85 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string ParticipantType { get; set; }
 
         [JsonProperty("nonamedType")]
-        public object NonamedType { get; set; }
+        public string NonamedType { get; set; }
 
         [JsonProperty("recordDesignation")]
         public string RecordDesignation { get; set; }
 
         [JsonProperty("attrc1")]
-        public object Attrc1 { get; set; }
+        public string Attrc1 { get; set; }
 
         [JsonProperty("attrc10")]
-        public object Attrc10 { get; set; }
+        public string Attrc10 { get; set; }
 
         [JsonProperty("attrc2")]
-        public object Attrc2 { get; set; }
+        public string Attrc2 { get; set; }
 
         [JsonProperty("attrc3")]
-        public object Attrc3 { get; set; }
+        public string Attrc3 { get; set; }
 
         [JsonProperty("attrc4")]
-        public object Attrc4 { get; set; }
+        public string Attrc4 { get; set; }
 
         [JsonProperty("attrc5")]
-        public object Attrc5 { get; set; }
+        public string Attrc5 { get; set; }
 
         [JsonProperty("attrc6")]
-        public object Attrc6 { get; set; }
+        public string Attrc6 { get; set; }
 
         [JsonProperty("attrc7")]
-        public object Attrc7 { get; set; }
+        public string Attrc7 { get; set; }
 
         [JsonProperty("attrc8")]
-        public object Attrc8 { get; set; }
+        public string Attrc8 { get; set; }
 
         [JsonProperty("attrc9")]
-        public object Attrc9 { get; set; }
+        public string Attrc9 { get; set; }
 
         [JsonProperty("attrd1")]
-        public object Attrd1 { get; set; }
+        public string Attrd1 { get; set; }
 
         [JsonProperty("attrd2")]
-        public object Attrd2 { get; set; }
+        public string Attrd2 { get; set; }
 
         [JsonProperty("attrd3")]
-        public object Attrd3 { get; set; }
+        public string Attrd3 { get; set; }
 
         [JsonProperty("attrd4")]
-        public object Attrd4 { get; set; }
+        public string Attrd4 { get; set; }
 
         [JsonProperty("attrd5")]
-        public object Attrd5 { get; set; }
+        public string Attrd5 { get; set; }
 
         [JsonProperty("attrn1")]
-        public object Attrn1 { get; set; }
+        public string Attrn1 { get; set; }
 
         [JsonProperty("attrn10")]
-        public object Attrn10 { get; set; }
+        public string Attrn10 { get; set; }
 
         [JsonProperty("attrn2")]
-        public object Attrn2 { get; set; }
+        public string Attrn2 { get; set; }
 
         [JsonProperty("attrn3")]
-        public object Attrn3 { get; set; }
+        public string Attrn3 { get; set; }
 
         [JsonProperty("attrn4")]
-        public object Attrn4 { get; set; }
+        public string Attrn4 { get; set; }
 
         [JsonProperty("attrn5")]
-        public object Attrn5 { get; set; }
+        public string Attrn5 { get; set; }
 
         [JsonProperty("attrn6")]
-        public object Attrn6 { get; set; }
+        public string Attrn6 { get; set; }
 
         [JsonProperty("attrn7")]
-        public object Attrn7 { get; set; }
+        public string Attrn7 { get; set; }
 
         [JsonProperty("attrn8")]
-        public object Attrn8 { get; set; }
+        public string Attrn8 { get; set; }
 
         [JsonProperty("attrn9")]
-        public object Attrn9 { get; set; }
+        public string Attrn9 { get; set; }
 
         [JsonProperty("updatedBy")]
         public string UpdatedBy { get; set; }
@@ -2324,7 +2324,7 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public DateTimeOffset UpdatedOn { get; set; }
 
         [JsonProperty("policyParticipantsAdditions")]
-        public object[] PolicyParticipantsAdditions { get; set; }
+        public string[] PolicyParticipantsAdditions { get; set; }
 
         [JsonProperty("policyParticipantsNames")]
         public PolicyParticipantsNames PolicyParticipantsNames { get; set; }
@@ -2405,28 +2405,28 @@ namespace Cl.Sura.ESoapApi.Models.Entities.ConsultaPoliza
         public string OfficePid { get; set; }
 
         [JsonProperty("salesChannelId")]
-        public object SalesChannelId { get; set; }
+        public string SalesChannelId { get; set; }
 
         [JsonProperty("salesChannelManId")]
-        public object SalesChannelManId { get; set; }
+        public string SalesChannelManId { get; set; }
 
         [JsonProperty("salesChannelName")]
-        public object SalesChannelName { get; set; }
+        public string SalesChannelName { get; set; }
 
         [JsonProperty("salesChannelPid")]
-        public object SalesChannelPid { get; set; }
+        public string SalesChannelPid { get; set; }
 
         [JsonProperty("staffId")]
         public long StaffId { get; set; }
 
         [JsonProperty("staffManId")]
-        public object StaffManId { get; set; }
+        public string StaffManId { get; set; }
 
         [JsonProperty("staffName")]
-        public object StaffName { get; set; }
+        public string StaffName { get; set; }
 
         [JsonProperty("staffPid")]
-        public object StaffPid { get; set; }
+        public string StaffPid { get; set; }
     }
 
 }
