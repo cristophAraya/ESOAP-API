@@ -87,7 +87,7 @@ namespace CharlesApi.Repository.Siniestro
         {
             using (IDbConnection db = new SqlConnection(GetDatabase()))
             {
-                string query = @"INSERT INTO Dbo.Siniestro  (NumeroPoliza, Patente, RelatoSiniestro, FechaSiniestro, LugarSiniestro, ComentarioSiniestro, NumeroSiniestro,NumeroInforme,CodigoTipoEvento,TipoEvento) VALUES (@NumeroPoliza, @Patente, @RelatoSiniestro, @FechaSiniestro, @LugarSiniestro, @ComentarioSiniestro, @NumeroSiniestro,@NumeroInforme,@CodigoTipoEvento,@TipoEvento)";
+                string query = @"INSERT INTO Dbo.Siniestro  (NumeroPoliza, Patente, RelatoSiniestro, FechaSiniestro, LugarSiniestro, ComentarioSiniestro, NumeroSiniestro,NumeroInforme,CodigoEvento,TipoEvento,FechaRegistro) VALUES (@NumeroPoliza, @Patente, @RelatoSiniestro, @FechaSiniestro, @LugarSiniestro, @ComentarioSiniestro, @NumeroSiniestro,@NumeroInforme,@CodigoEvento,@TipoEvento,@FechaRegistro)";
                 db.Execute(query, siniestroModel);
             }
             return siniestroModel;

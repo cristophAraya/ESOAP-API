@@ -24,19 +24,19 @@
 using AutoMapper;
 using CharlesApi.Entities.TipoReclamante;
 using CharlesApi.Helpers.Base;
+using CharlesApi.Models.Result.TipoReclamante;
 using CharlesApi.Repository.TipoReclamante;
 using CharlesApi.Request.TipoReclamante;
-using CharlesApi.Result.TipoReclamante;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 
 namespace CharlesApi.Data.TipoReclamante
 {
-	/// <summary>
-	/// Esta Clase TipoReclamante  permite gestionar reglas de negocio asociados a la entidad TipoReclamante
-	/// </summary>
-	public partial class TipoReclamanteService : ITipoReclamanteService
+    /// <summary>
+    /// Esta Clase TipoReclamante  permite gestionar reglas de negocio asociados a la entidad TipoReclamante
+    /// </summary>
+    public partial class TipoReclamanteService : ITipoReclamanteService
 	{	
         private ISettingsConfig settings;
         private ITipoReclamanteRepository tipoReclamanteRepository;

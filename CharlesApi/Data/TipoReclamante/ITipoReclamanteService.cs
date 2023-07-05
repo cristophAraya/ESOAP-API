@@ -1,5 +1,5 @@
-﻿using CharlesApi.Request.TipoReclamante;
-using CharlesApi.Result.TipoReclamante;
+﻿using CharlesApi.Models.Result.TipoReclamante;
+using CharlesApi.Request.TipoReclamante;
 
 namespace CharlesApi.Data.TipoReclamante
 {

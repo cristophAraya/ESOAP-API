@@ -132,6 +132,7 @@ namespace CharlesApi.Data.Siniestro
             try
             {
                 var siniestro = mapper.Map<SiniestroModel>(siniestroRequest);
+                siniestro.FechaRegistro = DateTime.Now;
                 siniestro = siniestroRepository.CrearSiniestro(siniestro);
                 if (siniestro != null)
                 {

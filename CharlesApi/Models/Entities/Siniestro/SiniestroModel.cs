@@ -31,8 +31,10 @@ namespace CharlesApi.Entities.Siniestro
         public string ComentarioSiniestro { get; set; }
         public string NumeroSiniestro { get; set; }
         public string NumeroInforme { get; set; }        
-        public string CodigoTipoEvento { get; set; }        
+        public string CodigoEvento { get; set; }        
         public string TipoEvento { get; set; }
+
+        public DateTime FechaRegistro { get; set; }
 
         /// <summary>
         /// Constructor de la Clase SiniestroTo
@@ -46,6 +48,7 @@ namespace CharlesApi.Entities.Siniestro
             LugarSiniestro = string.Empty;
             ComentarioSiniestro = string.Empty;
             NumeroSiniestro = string.Empty;
+            FechaRegistro = DateTime.Now;
         }
     }
 }

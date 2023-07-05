@@ -14,6 +14,7 @@ using CharlesApi.Repository.Banco;
 using CharlesApi.Repository.Beneficiario;
 using CharlesApi.Repository.Cobertura;
 using CharlesApi.Repository.CoberturaSiniestrada;
+using CharlesApi.Repository.Factura;
 using CharlesApi.Repository.Participante;
 using CharlesApi.Repository.Reclamante;
 using CharlesApi.Repository.Siniestro;
@@ -82,6 +83,7 @@ namespace CharlesApi
 
             services.AddSingleton<ICoberturaRepository, CoberturaRepository>();
             services.AddSingleton<IBancoRepository, BancoRepository>();
+            services.AddSingleton<IFacturaRepository, FacturaRepository>();
 
             services.AddSingleton<IBeneficiarioService, BeneficiarioService>();
             services.AddSingleton<IBeneficiarioRepository, BeneficiarioRepository>();

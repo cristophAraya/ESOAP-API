@@ -150,7 +150,7 @@ namespace CharlesApi.Models.Request.LiquidarSiniestro
         public string Moneda { get; set; }
 
         [JsonProperty("fechaFactura")]
-        public string FechaFactura { get; set; }
+        public DateTime FechaFactura { get; set; }
 
         [JsonProperty("beneficiarios")]
         public List<Beneficiario> Beneficiarios { get; set; }

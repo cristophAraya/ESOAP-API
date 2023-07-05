@@ -26,6 +26,7 @@ using Charles.Models.Result.Confirmar;
 using CharlesApi.ConfirmarEvaluacion;
 using CharlesApi.Entities.Beneficiario;
 using CharlesApi.Entities.CoberturaSiniestrada;
+using CharlesApi.Entities.Factura;
 using CharlesApi.Entities.Participante;
 using CharlesApi.Entities.Reclamante;
 using CharlesApi.Entities.SiniestroLog;
@@ -57,6 +58,7 @@ using CharlesApi.Repository.Banco;
 using CharlesApi.Repository.Beneficiario;
 using CharlesApi.Repository.Cobertura;
 using CharlesApi.Repository.CoberturaSiniestrada;
+using CharlesApi.Repository.Factura;
 using CharlesApi.Repository.Participante;
 using CharlesApi.Repository.Reclamante;
 using CharlesApi.Repository.SiniestroLog;
@@ -81,9 +83,10 @@ namespace CharlesApi.Data.Liquidar
         private ISiniestroLogRepository siniestroLogRepository;
         private ITipoReclamanteRepository  tipoReclamanteRepository;
         private IBancoRepository bancoRepository;
+        private IFacturaRepository facturaRepository;
         private ILogger<LiquidarService> logger;
         private IMapper mapper;        
-        public LiquidarService(ISettingsConfig settings,  IMapper mapper, IReclamanteRepository reclamanteRepository, ICoberturaSiniestradaRepository coberturaSiniestradaRepository, IBeneficiarioRepository beneficiarioRepository, ILogger<LiquidarService> logger, ISiniestroLogRepository siniestroLogRepository, ITipoReclamanteRepository tipoReclamanteRepository, IParticipanteRepository participanteRepository, ICoberturaRepository coberturaRepository, IBancoRepository bancoRepository)
+        public LiquidarService(ISettingsConfig settings,  IMapper mapper, IReclamanteRepository reclamanteRepository, ICoberturaSiniestradaRepository coberturaSiniestradaRepository, IBeneficiarioRepository beneficiarioRepository, ILogger<LiquidarService> logger, ISiniestroLogRepository siniestroLogRepository, ITipoReclamanteRepository tipoReclamanteRepository, IParticipanteRepository participanteRepository, ICoberturaRepository coberturaRepository, IBancoRepository bancoRepository, IFacturaRepository facturaRepository)
         
         {
             this.logger = logger;
@@ -97,6 +100,7 @@ namespace CharlesApi.Data.Liquidar
             this.participanteRepository = participanteRepository;
             this.coberturaRepository = coberturaRepository;
             this.bancoRepository = bancoRepository;
+            this.facturaRepository = facturaRepository;
         }
 
         public void Dispose()
@@ -405,6 +409,18 @@ namespace CharlesApi.Data.Liquidar
                                 //DESDE ACA ES POR FACTURAS                            
                                 foreach (var unaFactura in unParticipante.Facturas)
                                 {
+                                    //FACTURA
+                                    FacturaModel facturaModel = new FacturaModel();
+                                    facturaModel.NumeroFactura = unaFactura.NumeroFactura;
+                                    facturaModel.NumeroSiniestro = liquidarSiniestroRequest.NumeroSiniestro;
+                                    facturaModel.NumeroPoliza = siniestro.PolicyReg.ToString();
+                                    facturaModel.FechaFactura = unaFactura.FechaFactura;
+                                    facturaModel.ValorFactura = unaFactura.ValorFactura;
+                                    facturaModel.Moneda = unaFactura.Moneda;
+                                    facturaModel.Cobertura = unaCobertura.Cobertura;
+                                    facturaRepository.CrearFactura(facturaModel);
+
+
                                     //1-BUSCAMOS SI YA REGISTRAMOS RECLAMANTE EN BD
                                     var reclamanteModelBD = mapper.Map<ReclamanteModel>(unReclamante);
                                     reclamanteModelBD.NumeroInforme = liquidarSiniestroRequest.NumeroInforme;

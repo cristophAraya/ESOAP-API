@@ -15,6 +15,7 @@ using AutoMapper;
 using CharlesApi.Entities.Beneficiario;
 using CharlesApi.Entities.Cobertura;
 using CharlesApi.Entities.CoberturaSiniestrada;
+using CharlesApi.Entities.Factura;
 using CharlesApi.Entities.Participante;
 using CharlesApi.Entities.Reclamante;
 using CharlesApi.Entities.Siniestro;
@@ -24,8 +25,10 @@ using CharlesApi.Entities.TipoReclamante;
 using CharlesApi.Models.Request.DeclararSiniestro;
 using CharlesApi.Models.Request.ReclamantePrincipal;
 using CharlesApi.Models.Result.LiquidarSiniestro;
+using CharlesApi.Models.Result.TipoReclamante;
 using CharlesApi.Request.Cobertura;
 using CharlesApi.Request.CoberturaSiniestrada;
+using CharlesApi.Request.Factura;
 using CharlesApi.Request.Participante;
 using CharlesApi.Request.Reclamante;
 using CharlesApi.Request.Siniestro;
@@ -34,12 +37,12 @@ using CharlesApi.Request.TipoEvento;
 using CharlesApi.Request.TipoReclamante;
 using CharlesApi.Result.Cobertura;
 using CharlesApi.Result.CoberturaSiniestrada;
+using CharlesApi.Result.Factura;
 using CharlesApi.Result.Participante;
 using CharlesApi.Result.Reclamante;
 using CharlesApi.Result.Siniestro;
 using CharlesApi.Result.SiniestroLog;
 using CharlesApi.Result.TipoEvento;
-using CharlesApi.Result.TipoReclamante;
 
 namespace CharlesApi.Helpers.Mapper
 {
@@ -140,6 +143,8 @@ namespace CharlesApi.Helpers.Mapper
 
             CreateMap<ParticipanteRequest, ParticipanteModel>().ReverseMap();
             CreateMap<ParticipanteResult, ParticipanteModel>().ReverseMap();
+            CreateMap<FacturaRequest, FacturaModel>().ReverseMap();
+            CreateMap<FacturaResult, FacturaModel>().ReverseMap();
 
             CreateMap<CoberturaSiniestradaRequest, CoberturaSiniestradaModel>().ReverseMap();
             CreateMap<CoberturaSiniestradaResult, CoberturaSiniestradaModel>().ReverseMap();            

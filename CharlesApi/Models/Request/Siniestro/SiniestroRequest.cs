@@ -45,8 +45,8 @@ namespace CharlesApi.Request.Siniestro
         [JsonPropertyName("numeroInforme")]
         public string NumeroInforme { get; set; }
 
-        [JsonPropertyName("codigoTipoEvento")]
-        public string CodigoTipoEvento { get; set; }
+        [JsonPropertyName("codigoEvento")]
+        public string CodigoEvento { get; set; }
 
 
         [JsonPropertyName("tipoEvento")]

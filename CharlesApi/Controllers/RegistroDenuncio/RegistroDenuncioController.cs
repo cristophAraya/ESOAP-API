@@ -55,22 +55,11 @@ namespace CharlesApi.Controllers.RegistroDenuncio
             DeclararSiniestroResult declararSiniestroResult = new DeclararSiniestroResult() { StatusCode = StatusCodes.Status400BadRequest };
             RegistroDenuncioResult result = new RegistroDenuncioResult() { StatusCode = StatusCodes.Status204NoContent };
 
-
-            //if (declararSiniestroRequest.NumeroPoliza != "100036948")
-            //{
-            //    declararSiniestroResult.Errores.Add("Numero Poliza no corresponde a Patente Indicada");
-            //}
-            //else
-            //{
-            //    var random = new Random();
-            //    var value = random.Next(0,15000 );
-            //    declararSiniestroResult.StatusCode = StatusCodes.Status201Created;
-            //    declararSiniestroResult.NumeroSiniestro = value.ToString();
-            //}
-
-
             try
-            {   //Consulta Datos Poliza (IPC 101)
+            {
+                
+
+                //Consulta Datos Poliza (IPC 101)
                 ConsultaPolizaResult consultaPolizaResult = ConsultaPoliza(declararSiniestroRequest.NumeroPoliza);
 
                 //Existe Poliza ? y validar contra patnte del request
@@ -88,6 +77,7 @@ namespace CharlesApi.Controllers.RegistroDenuncio
 
 
                     CultureInfo provider = CultureInfo.InvariantCulture;
+                    //sDateTime dateTime10 = DateTime.ParseExact(declararSiniestroRequest.FechaSiniestro, "YYYYMMDD HH:mm:ss", provider);
                     // It throws Argument null exception
                     //var fecha = declararSiniestroRequest.FechaSiniestro.Split(' ', ':');
                     //var fechaConvertida = new DateTime(Convert.ToInt32(fecha[0].Substring(0, 4)), Convert.ToInt32(fecha[0].Substring(4, 2)), Convert.ToInt32(fecha[0].Substring(6, 2)));
